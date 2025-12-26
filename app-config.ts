@@ -10,6 +10,7 @@ export interface AppConfig {
 
   logo: string;
   startButtonText: string;
+  welcomeNote: string;
   accent?: string;
   logoDark?: string;
   accentDark?: string;
@@ -20,8 +21,8 @@ export interface AppConfig {
 }
 
 export const APP_CONFIG_DEFAULTS: AppConfig = {
-  companyName: 'LiveKit',
-  pageTitle: 'LiveKit Voice Agent',
+  companyName: 'Veritas Learning Centre',
+  pageTitle: 'Learn about cells with VLC',
   pageDescription: 'A voice agent built with LiveKit',
 
   supportsChatInput: true,
@@ -33,7 +34,9 @@ export const APP_CONFIG_DEFAULTS: AppConfig = {
   accent: '#002cf2',
   logoDark: '/lk-logo-dark.svg',
   accentDark: '#1fd5f9',
-  startButtonText: 'Start call',
+  startButtonText: 'Tap to learn about cells',
+  welcomeNote:
+    'Greetings! I am here to help you learn about cells. Ask me anything about cell structure, functions, and more!',
 
   // for LiveKit Cloud Sandbox
   sandboxId: undefined,

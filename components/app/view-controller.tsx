@@ -42,6 +42,7 @@ export function ViewController({ appConfig }: ViewControllerProps) {
           key="welcome"
           {...VIEW_MOTION_PROPS}
           startButtonText={appConfig.startButtonText}
+          welcomeNote={appConfig.welcomeNote}
           onStartCall={start}
         />
       )}
