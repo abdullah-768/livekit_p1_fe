@@ -48,7 +48,7 @@ export function PreConnectMessage({ className, messages = [] }: PreConnectMessag
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-violet-600/20 to-cyan-600/20 border border-violet-500/20 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
             <ShimmerText className="text-sm font-semibold text-slate-300">
-              🎤 AI Buddy is listening... ask anything!
+              🎤 VLC Study Buddy is listening... ask anything!
             </ShimmerText>
           </div>
         </MotionMessage>

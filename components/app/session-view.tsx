@@ -188,7 +188,7 @@ export const SessionView = ({
         {chatOpen && (
           <div className="absolute top-0 inset-x-0 z-30 pt-6 pb-4 text-center pointer-events-none">
             <h2 className="text-lg font-semibold bg-gradient-to-r from-violet-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-              💬 Chat with AI Study Buddy
+              💬 Chat with VLC Study Buddy
             </h2>
             <p className="text-xs text-slate-500 mt-1">Ask anything about your studies!</p>
           </div>

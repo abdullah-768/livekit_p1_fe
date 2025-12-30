@@ -227,7 +227,7 @@ export const WelcomeView = ({
         {/* Title */}
         <h1 className="mb-3 text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl">
           <span className="bg-gradient-to-r from-violet-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-            AI Study Buddy
+            VLC Study Buddy
           </span>
         </h1>
         
