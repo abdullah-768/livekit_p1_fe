@@ -106,27 +106,31 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
           >
             <AnimatePresence mode="popLayout">
               {!isAvatar && (
-                // Audio Agent - Playful visualizer
+                // Audio Agent - Playful visualizer (fixed size, only visible when chat is open)
                 <MotionContainer
                   key="agent"
                   layoutId="agent"
                   initial={{
                     opacity: 0,
-                    scale: 0,
+                    scale: 0.8,
                   }}
                   animate={{
                     opacity: 1,
                     scale: chatOpen ? 1 : 5,
+                  }}
+                  exit={{
+                    opacity: 0,
+                    scale: 0.8,
                   }}
                   transition={{
                     ...ANIMATION_TRANSITION,
                     delay: animationDelay,
                   }}
                   className={cn(
-                    'aspect-square h-[90px] rounded-2xl transition-all duration-300',
+                    // Fixed size container - never changes dimensions
+                    'aspect-square h-[90px] rounded-2xl',
                     'bg-gradient-to-br from-slate-800/90 via-slate-900/90 to-slate-800/90',
-                    'border border-violet-500/20 shadow-lg shadow-violet-500/10',
-                    chatOpen && 'border-cyan-500/30 shadow-cyan-500/15'
+                    'border border-cyan-500/30 shadow-lg shadow-cyan-500/15'
                   )}
                 >
                   <BarVisualizer
@@ -139,7 +143,7 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                     <span
                       className={cn([
                         'bg-gradient-to-t from-violet-500 to-cyan-400 min-h-2.5 w-2.5 rounded-full',
-                        'origin-center transition-all duration-250 ease-linear',
+                        'origin-center transition-all duration-150 ease-out',
                         'data-[lk-highlighted=true]:from-violet-400 data-[lk-highlighted=true]:to-cyan-300 data-[lk-highlighted=true]:shadow-lg data-[lk-highlighted=true]:shadow-cyan-400/50',
                         'data-[lk-muted=true]:from-slate-600 data-[lk-muted=true]:to-slate-500',
                       ])}
