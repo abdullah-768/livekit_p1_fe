@@ -106,7 +106,7 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
           >
             <AnimatePresence mode="popLayout">
               {!isAvatar && (
-                // Audio Agent
+                // Audio Agent - Playful visualizer
                 <MotionContainer
                   key="agent"
                   layoutId="agent"
@@ -123,8 +123,10 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                     delay: animationDelay,
                   }}
                   className={cn(
-                    'bg-background aspect-square h-[90px] rounded-md border border-transparent transition-[border,drop-shadow]',
-                    chatOpen && 'border-input/50 drop-shadow-lg/10 delay-200'
+                    'aspect-square h-[90px] rounded-2xl transition-all duration-300',
+                    'bg-gradient-to-br from-slate-800/90 via-slate-900/90 to-slate-800/90',
+                    'border border-violet-500/20 shadow-lg shadow-violet-500/10',
+                    chatOpen && 'border-cyan-500/30 shadow-cyan-500/15'
                   )}
                 >
                   <BarVisualizer
@@ -132,13 +134,14 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                     state={agentState}
                     options={{ minHeight: 5 }}
                     trackRef={agentAudioTrack}
-                    className={cn('flex h-full items-center justify-center gap-1')}
+                    className={cn('flex h-full items-center justify-center gap-1.5')}
                   >
                     <span
                       className={cn([
-                        'bg-muted min-h-2.5 w-2.5 rounded-full',
-                        'origin-center transition-colors duration-250 ease-linear',
-                        'data-[lk-highlighted=true]:bg-foreground data-[lk-muted=true]:bg-muted',
+                        'bg-gradient-to-t from-violet-500 to-cyan-400 min-h-2.5 w-2.5 rounded-full',
+                        'origin-center transition-all duration-250 ease-linear',
+                        'data-[lk-highlighted=true]:from-violet-400 data-[lk-highlighted=true]:to-cyan-300 data-[lk-highlighted=true]:shadow-lg data-[lk-highlighted=true]:shadow-cyan-400/50',
+                        'data-[lk-muted=true]:from-slate-600 data-[lk-muted=true]:to-slate-500',
                       ])}
                     />
                   </BarVisualizer>
@@ -146,7 +149,7 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
               )}
 
               {isAvatar && (
-                // Avatar Agent
+                // Avatar Agent - with playful border
                 <MotionContainer
                   key="avatar"
                   layoutId="avatar"
@@ -161,7 +164,7 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                     maskImage:
                       'radial-gradient(circle, rgba(0, 0, 0, 1) 0, rgba(0, 0, 0, 1) 500px, transparent 500px)',
                     filter: 'blur(0px)',
-                    borderRadius: chatOpen ? 6 : 12,
+                    borderRadius: chatOpen ? 16 : 20,
                   }}
                   transition={{
                     ...ANIMATION_TRANSITION,
@@ -174,7 +177,9 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                     },
                   }}
                   className={cn(
-                    'overflow-hidden bg-black drop-shadow-xl/80',
+                    'overflow-hidden shadow-xl',
+                    'border-2 border-violet-500/30',
+                    'shadow-[0_0_30px_rgba(139,92,246,0.2)]',
                     chatOpen ? 'h-[90px]' : 'h-auto w-full'
                   )}
                 >
@@ -219,13 +224,13 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                     ...ANIMATION_TRANSITION,
                     delay: animationDelay,
                   }}
-                  className="drop-shadow-lg/20"
+                  className="shadow-lg shadow-violet-500/20"
                 >
                   <VideoTrack
                     trackRef={cameraTrack || screenShareTrack}
                     width={(cameraTrack || screenShareTrack)?.publication.dimensions?.width ?? 0}
                     height={(cameraTrack || screenShareTrack)?.publication.dimensions?.height ?? 0}
-                    className="bg-muted aspect-square w-[90px] rounded-md object-cover"
+                    className="aspect-square w-[90px] rounded-xl object-cover border-2 border-cyan-500/30 bg-slate-900"
                   />
                 </MotionContainer>
               )}

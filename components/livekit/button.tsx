@@ -6,8 +6,9 @@ import { cn } from '@/lib/utils';
 const buttonVariants = cva(
   [
     'text-xs font-bold tracking-wider uppercase whitespace-nowrap',
-    'inline-flex items-center justify-center gap-2 shrink-0 rounded-full cursor-pointer outline-none transition-colors duration-300',
-    'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
+    'inline-flex items-center justify-center gap-2 shrink-0 rounded-xl cursor-pointer outline-none transition-all duration-200',
+    'hover:scale-105 active:scale-95',
+    'focus-visible:border-violet-500 focus-visible:ring-violet-500/50 focus-visible:ring-[3px]',
     'disabled:pointer-events-none disabled:opacity-50',
     'aria-invalid:ring-destructive/20 aria-invalid:border-destructive dark:aria-invalid:ring-destructive/40 ',
     "[&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0",
@@ -15,27 +16,27 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-muted text-foreground hover:bg-muted focus:bg-muted hover:bg-foreground/10',
+        default: 'bg-slate-800/60 text-slate-300 hover:bg-slate-700/80 hover:text-white',
         destructive: [
-          'bg-destructive/10 text-destructive',
-          'hover:bg-destructive/20 focus:bg-destructive/20 focus-visible:ring-destructive/20',
-          'dark:focus-visible:ring-destructive/40',
+          'bg-gradient-to-r from-red-600 to-orange-600 text-white',
+          'hover:from-red-500 hover:to-orange-500',
+          'shadow-lg shadow-red-500/20 hover:shadow-red-500/30',
+          'focus-visible:ring-red-500/40',
         ],
         outline: [
-          'border border-input bg-background',
-          'hover:bg-accent hover:text-accent-foreground',
-          'dark:bg-input/30 dark:border-input dark:hover:bg-input/50',
+          'border border-white/10 bg-transparent',
+          'hover:bg-slate-800/50 hover:text-white',
         ],
-        primary: 'bg-primary text-primary-foreground hover:bg-primary/70 focus:bg-primary/70',
-        secondary: 'bg-foreground/15 text-secondary-foreground hover:bg-foreground/20',
-        ghost: 'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
-        link: 'text-primary underline-offset-4 hover:underline',
+        primary: 'bg-gradient-to-r from-violet-600 to-cyan-600 text-white hover:from-violet-500 hover:to-cyan-500 shadow-lg shadow-violet-500/20 hover:shadow-violet-500/30',
+        secondary: 'bg-slate-800/60 text-slate-400 hover:bg-slate-700/80 hover:text-white',
+        ghost: 'hover:bg-slate-800/50 hover:text-white',
+        link: 'text-cyan-400 underline-offset-4 hover:underline hover:text-cyan-300',
       },
       size: {
-        default: 'h-9 px-4 py-2 has-[>svg]:px-3',
+        default: 'h-10 px-5 py-2 has-[>svg]:px-4',
         sm: 'h-8 gap-1.5 px-3 has-[>svg]:px-2.5',
-        lg: 'h-10 px-6 has-[>svg]:px-4',
-        icon: 'size-9',
+        lg: 'h-11 px-6 has-[>svg]:px-4',
+        icon: 'size-10',
       },
     },
     defaultVariants: {

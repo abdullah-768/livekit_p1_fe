@@ -38,10 +38,18 @@ export type TrackToggleProps = React.ComponentProps<typeof Toggle> & {
 
 export function TrackToggle({ source, pressed, pending, className, ...props }: TrackToggleProps) {
   const IconComponent = getSourceIcon(source, pressed ?? false, pending);
+  const isMicrophone = source === Track.Source.Microphone;
 
   return (
     <Toggle pressed={pressed} aria-label={`Toggle ${source}`} className={cn(className)} {...props}>
-      <IconComponent weight="bold" className={cn(pending && 'animate-spin')} />
+      <IconComponent 
+        weight="bold" 
+        className={cn(
+          pending && 'animate-spin',
+          isMicrophone && pressed && 'text-emerald-300 drop-shadow-[0_0_6px_rgba(16,185,129,0.8)]',
+          isMicrophone && !pressed && 'text-red-400 drop-shadow-[0_0_6px_rgba(239,68,68,0.8)]'
+        )} 
+      />
       {props.children}
     </Toggle>
   );

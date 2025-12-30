@@ -24,12 +24,12 @@ type DeviceSelectProps = React.ComponentProps<typeof SelectTrigger> & {
 };
 
 const selectVariants = cva(
-  'w-full rounded-full px-3 py-2 text-sm cursor-pointer disabled:not-allowed',
+  'w-full rounded-xl px-3 py-2 text-sm cursor-pointer disabled:not-allowed transition-all duration-200',
   {
     variants: {
       size: {
         default: 'w-[180px]',
-        sm: 'w-auto',
+        sm: 'w-auto h-10',
       },
     },
     defaultVariants: {
