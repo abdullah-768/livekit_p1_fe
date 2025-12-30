@@ -217,3 +217,9 @@
     }
   }
 }
+
+/* Hide Next.js development indicators */
+#__next-build-watcher,
+nextjs-portal {
+  display: none !important;
+}
