@@ -2,6 +2,267 @@
 
 import { useEffect, useState } from 'react';
 
+// Mini Robot Icon for background decoration
+function MiniRobot({ className, delay = '0s', variant = 1 }: { className?: string; delay?: string; variant?: 1 | 2 | 3 }) {
+  const robots = {
+    1: ( // Cute round robot
+      <svg className={`absolute animate-float-gentle ${className}`} style={{ animationDelay: delay }} width="50" height="50" viewBox="0 0 50 50" fill="none">
+        <circle cx="25" cy="28" r="18" fill="url(#miniRobotGrad1)" opacity="0.15"/>
+        <circle cx="18" cy="26" r="4" fill="url(#miniRobotGrad1)" opacity="0.2"/>
+        <circle cx="32" cy="26" r="4" fill="url(#miniRobotGrad1)" opacity="0.2"/>
+        <rect x="20" y="8" width="10" height="8" rx="2" fill="url(#miniRobotGrad1)" opacity="0.12"/>
+        <line x1="25" y1="8" x2="25" y2="4" stroke="url(#miniRobotGrad1)" strokeWidth="2" opacity="0.15"/>
+        <circle cx="25" cy="3" r="2" fill="url(#miniRobotGrad1)" opacity="0.2"/>
+        <path d="M18 34 Q25 38 32 34" stroke="url(#miniRobotGrad1)" strokeWidth="2" fill="none" opacity="0.15"/>
+        <defs>
+          <linearGradient id="miniRobotGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#8B5CF6"/>
+            <stop offset="100%" stopColor="#06B6D4"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    ),
+    2: ( // Square robot with antenna
+      <svg className={`absolute animate-float-gentle ${className}`} style={{ animationDelay: delay }} width="45" height="55" viewBox="0 0 45 55" fill="none">
+        <rect x="8" y="18" width="29" height="30" rx="6" fill="url(#miniRobotGrad2)" opacity="0.12"/>
+        <rect x="14" y="25" width="6" height="6" rx="2" fill="url(#miniRobotGrad2)" opacity="0.18"/>
+        <rect x="25" y="25" width="6" height="6" rx="2" fill="url(#miniRobotGrad2)" opacity="0.18"/>
+        <rect x="18" y="36" width="9" height="4" rx="1" fill="url(#miniRobotGrad2)" opacity="0.15"/>
+        <line x1="22" y1="18" x2="22" y2="8" stroke="url(#miniRobotGrad2)" strokeWidth="2" opacity="0.12"/>
+        <circle cx="22" cy="6" r="4" fill="url(#miniRobotGrad2)" opacity="0.15">
+          <animate attributeName="opacity" values="0.15;0.25;0.15" dur="2s" repeatCount="indefinite"/>
+        </circle>
+        <defs>
+          <linearGradient id="miniRobotGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#A855F7"/>
+            <stop offset="100%" stopColor="#22D3EE"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    ),
+    3: ( // Friendly bot face
+      <svg className={`absolute animate-float-gentle ${className}`} style={{ animationDelay: delay }} width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <rect x="6" y="10" width="36" height="28" rx="8" fill="url(#miniRobotGrad3)" opacity="0.12"/>
+        <circle cx="16" cy="22" r="5" fill="url(#miniRobotGrad3)" opacity="0.18"/>
+        <circle cx="32" cy="22" r="5" fill="url(#miniRobotGrad3)" opacity="0.18"/>
+        <circle cx="16" cy="22" r="2" fill="url(#miniRobotGrad3)" opacity="0.25">
+          <animate attributeName="cx" values="16;15;17;16" dur="3s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="32" cy="22" r="2" fill="url(#miniRobotGrad3)" opacity="0.25">
+          <animate attributeName="cx" values="32;31;33;32" dur="3s" repeatCount="indefinite"/>
+        </circle>
+        <path d="M16 30 Q24 36 32 30" stroke="url(#miniRobotGrad3)" strokeWidth="2" fill="none" opacity="0.15"/>
+        <rect x="4" y="20" width="4" height="8" rx="2" fill="url(#miniRobotGrad3)" opacity="0.1"/>
+        <rect x="40" y="20" width="4" height="8" rx="2" fill="url(#miniRobotGrad3)" opacity="0.1"/>
+        <defs>
+          <linearGradient id="miniRobotGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#7C3AED"/>
+            <stop offset="100%" stopColor="#0EA5E9"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    ),
+  };
+  return robots[variant];
+}
+
+// AI Brain icon for tech theme
+function AIBrain({ className, delay = '0s' }: { className?: string; delay?: string }) {
+  return (
+    <svg className={`absolute animate-float-gentle ${className}`} style={{ animationDelay: delay }} width="55" height="55" viewBox="0 0 55 55" fill="none">
+      <ellipse cx="27" cy="28" rx="18" ry="16" fill="url(#brainGrad)" opacity="0.1"/>
+      <path d="M20 20 Q15 25 18 32 Q14 28 16 22 Q18 16 24 18" stroke="url(#brainGrad)" strokeWidth="1.5" fill="none" opacity="0.12"/>
+      <path d="M35 20 Q40 25 37 32 Q41 28 39 22 Q37 16 31 18" stroke="url(#brainGrad)" strokeWidth="1.5" fill="none" opacity="0.12"/>
+      <path d="M22 28 Q27 24 32 28" stroke="url(#brainGrad)" strokeWidth="1.5" fill="none" opacity="0.1"/>
+      <circle cx="20" cy="25" r="2" fill="url(#brainGrad)" opacity="0.15">
+        <animate attributeName="opacity" values="0.15;0.25;0.15" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="34" cy="25" r="2" fill="url(#brainGrad)" opacity="0.15">
+        <animate attributeName="opacity" values="0.15;0.25;0.15" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+      </circle>
+      <circle cx="27" cy="32" r="2" fill="url(#brainGrad)" opacity="0.15">
+        <animate attributeName="opacity" values="0.15;0.25;0.15" dur="2s" repeatCount="indefinite" begin="1s"/>
+      </circle>
+      <defs>
+        <linearGradient id="brainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#A855F7"/>
+          <stop offset="100%" stopColor="#06B6D4"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
+// Chat bubble for AI conversation theme
+function ChatBubble({ className, delay = '0s', side = 'left' }: { className?: string; delay?: string; side?: 'left' | 'right' }) {
+  return (
+    <svg className={`absolute animate-float-gentle ${className}`} style={{ animationDelay: delay }} width="50" height="40" viewBox="0 0 50 40" fill="none">
+      <path 
+        d={side === 'left' 
+          ? "M8 8 H42 Q46 8 46 12 V28 Q46 32 42 32 H16 L8 38 V32 H8 Q4 32 4 28 V12 Q4 8 8 8Z"
+          : "M8 8 H42 Q46 8 46 12 V28 Q46 32 42 32 V38 L34 32 H8 Q4 32 4 28 V12 Q4 8 8 8Z"
+        } 
+        fill="url(#chatGrad)" 
+        opacity="0.1"
+      />
+      <circle cx="16" cy="20" r="2.5" fill="url(#chatGrad)" opacity="0.15">
+        <animate attributeName="opacity" values="0.15;0.25;0.15" dur="1.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="25" cy="20" r="2.5" fill="url(#chatGrad)" opacity="0.15">
+        <animate attributeName="opacity" values="0.15;0.25;0.15" dur="1.5s" repeatCount="indefinite" begin="0.2s"/>
+      </circle>
+      <circle cx="34" cy="20" r="2.5" fill="url(#chatGrad)" opacity="0.15">
+        <animate attributeName="opacity" values="0.15;0.25;0.15" dur="1.5s" repeatCount="indefinite" begin="0.4s"/>
+      </circle>
+      <defs>
+        <linearGradient id="chatGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#8B5CF6"/>
+          <stop offset="100%" stopColor="#06B6D4"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
+// Lightbulb for ideas/learning theme
+function Lightbulb({ className, delay = '0s' }: { className?: string; delay?: string }) {
+  return (
+    <svg className={`absolute animate-float-gentle ${className}`} style={{ animationDelay: delay }} width="40" height="50" viewBox="0 0 40 50" fill="none">
+      <ellipse cx="20" cy="18" rx="12" ry="14" fill="url(#bulbGrad)" opacity="0.12"/>
+      <path d="M14 28 Q14 34 16 36 H24 Q26 34 26 28" stroke="url(#bulbGrad)" strokeWidth="2" fill="none" opacity="0.1"/>
+      <line x1="15" y1="38" x2="25" y2="38" stroke="url(#bulbGrad)" strokeWidth="2" opacity="0.12"/>
+      <line x1="16" y1="41" x2="24" y2="41" stroke="url(#bulbGrad)" strokeWidth="2" opacity="0.1"/>
+      <line x1="17" y1="44" x2="23" y2="44" stroke="url(#bulbGrad)" strokeWidth="2" opacity="0.08"/>
+      {/* Glow rays */}
+      <line x1="20" y1="2" x2="20" y2="6" stroke="url(#bulbGrad)" strokeWidth="1.5" opacity="0.15">
+        <animate attributeName="opacity" values="0.1;0.2;0.1" dur="2s" repeatCount="indefinite"/>
+      </line>
+      <line x1="8" y1="8" x2="11" y2="11" stroke="url(#bulbGrad)" strokeWidth="1.5" opacity="0.12"/>
+      <line x1="32" y1="8" x2="29" y2="11" stroke="url(#bulbGrad)" strokeWidth="1.5" opacity="0.12"/>
+      <line x1="4" y1="18" x2="8" y2="18" stroke="url(#bulbGrad)" strokeWidth="1.5" opacity="0.12"/>
+      <line x1="32" y1="18" x2="36" y2="18" stroke="url(#bulbGrad)" strokeWidth="1.5" opacity="0.12"/>
+      <defs>
+        <linearGradient id="bulbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#FBBF24"/>
+          <stop offset="100%" stopColor="#8B5CF6"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
+// Sparkle star for fun decoration
+function SparkleStars({ className, delay = '0s' }: { className?: string; delay?: string }) {
+  return (
+    <svg className={`absolute animate-float-gentle ${className}`} style={{ animationDelay: delay }} width="35" height="35" viewBox="0 0 35 35" fill="none">
+      <path d="M17 2 L19 13 L30 15 L19 17 L17 28 L15 17 L4 15 L15 13 Z" fill="url(#starGrad)" opacity="0.12">
+        <animate attributeName="opacity" values="0.08;0.18;0.08" dur="3s" repeatCount="indefinite"/>
+      </path>
+      <circle cx="8" cy="8" r="1.5" fill="url(#starGrad)" opacity="0.15">
+        <animate attributeName="opacity" values="0.1;0.2;0.1" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="28" cy="28" r="1" fill="url(#starGrad)" opacity="0.12"/>
+      <defs>
+        <linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#FBBF24"/>
+          <stop offset="50%" stopColor="#A855F7"/>
+          <stop offset="100%" stopColor="#06B6D4"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
+// Book icon for study theme
+function BookIcon({ className, delay = '0s' }: { className?: string; delay?: string }) {
+  return (
+    <svg className={`absolute animate-float-gentle ${className}`} style={{ animationDelay: delay }} width="45" height="40" viewBox="0 0 45 40" fill="none">
+      <path d="M6 8 Q22 4 22 4 V32 Q22 32 6 36 Z" fill="url(#bookGrad)" opacity="0.1"/>
+      <path d="M39 8 Q23 4 23 4 V32 Q23 32 39 36 Z" fill="url(#bookGrad)" opacity="0.12"/>
+      <line x1="10" y1="14" x2="18" y2="12" stroke="url(#bookGrad)" strokeWidth="1" opacity="0.15"/>
+      <line x1="10" y1="18" x2="18" y2="16" stroke="url(#bookGrad)" strokeWidth="1" opacity="0.12"/>
+      <line x1="10" y1="22" x2="18" y2="20" stroke="url(#bookGrad)" strokeWidth="1" opacity="0.1"/>
+      <line x1="27" y1="12" x2="35" y2="14" stroke="url(#bookGrad)" strokeWidth="1" opacity="0.15"/>
+      <line x1="27" y1="16" x2="35" y2="18" stroke="url(#bookGrad)" strokeWidth="1" opacity="0.12"/>
+      <defs>
+        <linearGradient id="bookGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#8B5CF6"/>
+          <stop offset="100%" stopColor="#06B6D4"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
+// Circuit pattern for tech/AI theme
+function CircuitPattern({ className, delay = '0s' }: { className?: string; delay?: string }) {
+  return (
+    <svg className={`absolute animate-float-gentle ${className}`} style={{ animationDelay: delay }} width="60" height="60" viewBox="0 0 60 60" fill="none">
+      <path d="M10 30 H25 V15 H40" stroke="url(#circuitGrad)" strokeWidth="1.5" fill="none" opacity="0.08"/>
+      <path d="M10 40 H20 V50 H35" stroke="url(#circuitGrad)" strokeWidth="1.5" fill="none" opacity="0.08"/>
+      <path d="M30 10 V25 H50" stroke="url(#circuitGrad)" strokeWidth="1.5" fill="none" opacity="0.08"/>
+      <circle cx="25" cy="30" r="3" fill="url(#circuitGrad)" opacity="0.12">
+        <animate attributeName="opacity" values="0.1;0.2;0.1" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="40" cy="15" r="2" fill="url(#circuitGrad)" opacity="0.1"/>
+      <circle cx="20" cy="40" r="2" fill="url(#circuitGrad)" opacity="0.1"/>
+      <circle cx="35" cy="50" r="2" fill="url(#circuitGrad)" opacity="0.1"/>
+      <circle cx="30" cy="10" r="2" fill="url(#circuitGrad)" opacity="0.1"/>
+      <circle cx="50" cy="25" r="2" fill="url(#circuitGrad)" opacity="0.1"/>
+      <defs>
+        <linearGradient id="circuitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#06B6D4"/>
+          <stop offset="100%" stopColor="#8B5CF6"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
+// Rocket icon for excitement/launch theme
+function RocketIcon({ className, delay = '0s' }: { className?: string; delay?: string }) {
+  return (
+    <svg className={`absolute animate-float-gentle ${className}`} style={{ animationDelay: delay }} width="40" height="50" viewBox="0 0 40 50" fill="none">
+      <path d="M20 5 Q28 15 28 30 H12 Q12 15 20 5Z" fill="url(#rocketGrad)" opacity="0.12"/>
+      <ellipse cx="20" cy="32" rx="8" ry="4" fill="url(#rocketGrad)" opacity="0.1"/>
+      <circle cx="20" cy="20" r="4" fill="url(#rocketGrad)" opacity="0.15"/>
+      <path d="M12 28 L6 36 L12 32" fill="url(#rocketGrad)" opacity="0.1"/>
+      <path d="M28 28 L34 36 L28 32" fill="url(#rocketGrad)" opacity="0.1"/>
+      {/* Flame */}
+      <path d="M16 36 Q20 46 24 36" fill="url(#flameGrad)" opacity="0.15">
+        <animate attributeName="d" values="M16 36 Q20 46 24 36;M17 36 Q20 44 23 36;M16 36 Q20 46 24 36" dur="0.5s" repeatCount="indefinite"/>
+      </path>
+      <defs>
+        <linearGradient id="rocketGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#8B5CF6"/>
+          <stop offset="100%" stopColor="#06B6D4"/>
+        </linearGradient>
+        <linearGradient id="flameGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#FBBF24"/>
+          <stop offset="100%" stopColor="#F97316"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
+// Gear/cog icon for tech theme
+function GearIcon({ className, delay = '0s' }: { className?: string; delay?: string }) {
+  return (
+    <svg className={`absolute animate-spin-slow ${className}`} style={{ animationDelay: delay }} width="40" height="40" viewBox="0 0 40 40" fill="none">
+      <path d="M20 8 L22 8 L23 4 L17 4 L18 8 L20 8 M20 32 L22 32 L23 36 L17 36 L18 32 L20 32 M8 20 L8 22 L4 23 L4 17 L8 18 L8 20 M32 20 L32 22 L36 23 L36 17 L32 18 L32 20 M11 11 L12.5 12.5 L9 9 L15 9 L13 11 M29 29 L27.5 27.5 L31 31 L25 31 L27 29 M11 29 L12.5 27.5 L9 31 L9 25 L11 27 M29 11 L27.5 12.5 L31 9 L31 15 L29 13" stroke="url(#gearGrad)" strokeWidth="2" fill="none" opacity="0.1"/>
+      <circle cx="20" cy="20" r="8" stroke="url(#gearGrad)" strokeWidth="2" fill="none" opacity="0.1"/>
+      <circle cx="20" cy="20" r="4" fill="url(#gearGrad)" opacity="0.12"/>
+      <defs>
+        <linearGradient id="gearGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#8B5CF6"/>
+          <stop offset="100%" stopColor="#06B6D4"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
 // Fun Robot Buddy Character for Class 7-8 students
 function RobotBuddy() {
   return (
@@ -298,22 +559,70 @@ export const WelcomeView = ({
         backgroundSize: '50px 50px'
       }} />
 
+      {/* Large Background Robot - subtle watermark style */}
+      <div className="absolute inset-0 flex items-center pointer-events-none overflow-hidden">
+        <div className="absolute opacity-[0.06] scale-[2.5] md:scale-[3] lg:scale-[3.5] animate-float-gentle left-[15%] md:left-[15%]" style={{ animationDuration: '8s' }}>
+          <RobotBuddy />
+        </div>
+      </div>
+
       {/* Floating decorative elements */}
       {mounted && (
         <>
+          {/* Mini Robot characters scattered around */}
+          <MiniRobot className="top-[8%] left-[8%]" delay="0s" variant={1} />
+          <MiniRobot className="top-[15%] right-[12%]" delay="1.5s" variant={2} />
+          <MiniRobot className="bottom-[50%] right-[15%]" delay="2.5s" variant={3} />
+          <MiniRobot className="top-[50%] right-[6%]" delay="0.8s" variant={1} />
+          <MiniRobot className="bottom-[12%] right-[10%]" delay="1.8s" variant={2} />
+          <MiniRobot className="top-[72%] left-[10%]" delay="3s" variant={3} />
+          
+          {/* Chat bubbles for AI conversation theme */}
+          <ChatBubble className="top-[18%] right-[22%]" delay="1s" side="right" />
+          <ChatBubble className="bottom-[28%] left-[18%]" delay="2.2s" side="left" />
+          <ChatBubble className="top-[65%] right-[18%]" delay="0.3s" side="right" />
+          
+          {/* Lightbulbs for ideas */}
+          <Lightbulb className="top-[35%] left-[6%]" delay="1.2s" />
+          <Lightbulb className="bottom-[18%] right-[25%]" delay="2.8s" />
+          
+          {/* Sparkle stars */}
+          <SparkleStars className="top-[12%] left-[30%]" delay="0.4s" />
+          <SparkleStars className="top-[40%] right-[15%]" delay="1.6s" />
+          <SparkleStars className="bottom-[42%] left-[20%]" delay="2.4s" />
+          <SparkleStars className="top-[58%] left-[25%]" delay="0.9s" />
+          <SparkleStars className="bottom-[55%] right-[30%]" delay="3.2s" />
+          
+          {/* Book icons for study theme */}
+          <BookIcon className="top-[30%] right-[8%]" delay="1.8s" />
+
+          
+          {/* Circuit patterns for tech feel */}
+          <CircuitPattern className="top-[5%] right-[35%]" delay="2.1s" />
+          <CircuitPattern className="bottom-[8%] left-[30%]" delay="0.2s" />
+          <CircuitPattern className="top-[78%] right-[35%]" delay="1.4s" />
+          
+          {/* Rocket icons for excitement */}
+          <RocketIcon className="top-[22%] left-[15%]" delay="1.1s" />
+          <RocketIcon className="bottom-[15%] left-[22%]" delay="2.6s" />
+          
+          {/* Gear icons for tech theme */}
+          <GearIcon className="top-[48%] left-[4%]" delay="0s" />
+          <GearIcon className="bottom-[32%] right-[6%]" delay="1.5s" />
+          
           {/* Geometric shapes */}
-          <FloatingShape className="top-[10%] left-[5%]" delay="0s" type="circle" />
-          <FloatingShape className="top-[20%] right-[10%]" delay="1s" type="hexagon" />
-          <FloatingShape className="bottom-[25%] left-[8%]" delay="2s" type="square" />
-          <FloatingShape className="top-[45%] right-[5%]" delay="0.5s" type="triangle" />
-          <FloatingShape className="bottom-[15%] right-[15%]" delay="1.5s" type="circle" />
-          <FloatingShape className="top-[60%] left-[3%]" delay="2.5s" type="hexagon" />
-          <FloatingShape className="bottom-[40%] right-[8%]" delay="0.8s" type="square" />
+          <FloatingShape className="top-[10%] left-[45%]" delay="0s" type="circle" />
+          <FloatingShape className="top-[20%] right-[40%]" delay="1s" type="hexagon" />
+          <FloatingShape className="bottom-[25%] left-[40%]" delay="2s" type="square" />
+          <FloatingShape className="top-[45%] right-[25%]" delay="0.5s" type="triangle" />
+          <FloatingShape className="bottom-[15%] right-[45%]" delay="1.5s" type="circle" />
+          <FloatingShape className="top-[60%] left-[35%]" delay="2.5s" type="hexagon" />
+          <FloatingShape className="bottom-[40%] right-[38%]" delay="0.8s" type="square" />
           
           {/* Code brackets */}
-          <FloatingCode className="top-[15%] left-[20%]" delay="1.2s" />
-          <FloatingCode className="bottom-[20%] right-[25%]" delay="0.3s" />
-          <FloatingCode className="top-[70%] left-[15%]" delay="2.1s" />
+          <FloatingCode className="top-[15%] left-[55%]" delay="1.2s" />
+          <FloatingCode className="bottom-[20%] right-[55%]" delay="0.3s" />
+          <FloatingCode className="top-[70%] left-[45%]" delay="2.1s" />
           
           {/* Particle dots */}
           <ParticleDot className="top-[12%] left-[40%]" delay="0s" size={6} />
@@ -323,6 +632,9 @@ export const WelcomeView = ({
           <ParticleDot className="bottom-[45%] left-[45%]" delay="2s" size={6} />
           <ParticleDot className="top-[35%] left-[60%]" delay="0.8s" size={3} />
           <ParticleDot className="bottom-[60%] right-[55%]" delay="1.3s" size={5} />
+          <ParticleDot className="top-[8%] right-[48%]" delay="1.7s" size={4} />
+          <ParticleDot className="bottom-[65%] left-[12%]" delay="2.3s" size={5} />
+          <ParticleDot className="top-[75%] right-[12%]" delay="0.1s" size={4} />
         </>
       )}
 
