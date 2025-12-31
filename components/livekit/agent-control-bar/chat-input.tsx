@@ -65,7 +65,7 @@ export function ChatInput({
       inert={!chatOpen}
       {...MOTION_PROPS}
       animate={chatOpen ? 'visible' : 'hidden'}
-      className="flex w-full items-start overflow-hidden border-b border-white/10"
+      className="flex w-full items-start overflow-hidden border-b-2 border-blue-100"
     >
       <form
         onSubmit={handleSubmit}
@@ -79,32 +79,32 @@ export function ChatInput({
             type="text"
             value={message}
             disabled={!chatOpen}
-            placeholder="✨ Ask your study buddy anything..."
+            placeholder="🎤 Ask me anything! I'm here to help! ✨"
             onChange={(e) => setMessage(e.target.value)}
-            className="w-full h-10 px-4 bg-slate-800/50 border border-white/10 rounded-xl text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-violet-500/50 focus:ring-2 focus:ring-violet-500/20 transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50"
+            className="w-full h-12 px-5 bg-blue-50 border-2 border-blue-200 rounded-full text-gray-700 placeholder:text-blue-400 focus:outline-none focus:border-purple-400 focus:ring-4 focus:ring-purple-100 transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 font-medium text-base"
           />
           {/* Subtle glow on focus */}
-          <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-violet-500/0 via-violet-500/0 to-cyan-500/0 group-focus-within:from-violet-500/10 group-focus-within:via-purple-500/10 group-focus-within:to-cyan-500/10 transition-all duration-300 pointer-events-none" />
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-200/0 via-purple-200/0 to-pink-200/0 group-focus-within:from-blue-200/30 group-focus-within:via-purple-200/30 group-focus-within:to-pink-200/30 transition-all duration-300 pointer-events-none" />
         </div>
         
-        {/* Send button with fun gradient */}
+        {/* Send button - big and fun */}
         <Button
           size="icon"
           type="submit"
           disabled={isDisabled}
           title={isSending ? 'Sending...' : 'Send message'}
           className={`
-            self-start transition-all duration-300 h-10 w-10 rounded-xl
+            self-start transition-all duration-300 h-12 w-12 rounded-full
             ${isDisabled 
-              ? 'bg-slate-700/50 text-slate-500' 
-              : 'bg-gradient-to-r from-violet-600 to-cyan-600 text-white hover:from-violet-500 hover:to-cyan-500 hover:shadow-lg hover:shadow-violet-500/25 hover:scale-105 active:scale-95'
+              ? 'bg-gray-200 text-gray-400' 
+              : 'bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 text-white hover:from-green-500 hover:via-blue-600 hover:to-purple-600 hover:shadow-lg hover:shadow-blue-300/50 hover:scale-110 active:scale-95'
             }
           `}
         >
           {isSending ? (
             <SpinnerIcon className="animate-spin" weight="bold" />
           ) : (
-            <PaperPlaneRightIcon weight="bold" className="text-lg" />
+            <PaperPlaneRightIcon weight="bold" className="text-xl" />
           )}
         </Button>
       </form>

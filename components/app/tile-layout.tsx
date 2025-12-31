@@ -127,10 +127,10 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                     delay: animationDelay,
                   }}
                   className={cn(
-                    // Fixed size container - never changes dimensions
-                    'aspect-square h-[90px] rounded-2xl',
-                    'bg-gradient-to-br from-slate-800/90 via-slate-900/90 to-slate-800/90',
-                    'border border-cyan-500/30 shadow-lg shadow-cyan-500/15'
+                    // Fixed size container - playful style for kids
+                    'aspect-square h-[90px] rounded-3xl',
+                    'bg-gradient-to-br from-blue-100 via-purple-50 to-pink-100',
+                    'border-4 border-blue-200 shadow-xl shadow-blue-200/50'
                   )}
                 >
                   <BarVisualizer
@@ -138,14 +138,14 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                     state={agentState}
                     options={{ minHeight: 5 }}
                     trackRef={agentAudioTrack}
-                    className={cn('flex h-full items-center justify-center gap-1.5')}
+                    className={cn('flex h-full items-center justify-center gap-2')}
                   >
                     <span
                       className={cn([
-                        'bg-gradient-to-t from-violet-500 to-cyan-400 min-h-2.5 w-2.5 rounded-full',
+                        'bg-gradient-to-t from-blue-500 via-purple-400 to-pink-400 min-h-3 w-3 rounded-full',
                         'origin-center transition-all duration-150 ease-out',
-                        'data-[lk-highlighted=true]:from-violet-400 data-[lk-highlighted=true]:to-cyan-300 data-[lk-highlighted=true]:shadow-lg data-[lk-highlighted=true]:shadow-cyan-400/50',
-                        'data-[lk-muted=true]:from-slate-600 data-[lk-muted=true]:to-slate-500',
+                        'data-[lk-highlighted=true]:from-green-400 data-[lk-highlighted=true]:to-yellow-300 data-[lk-highlighted=true]:shadow-lg data-[lk-highlighted=true]:shadow-yellow-300/50',
+                        'data-[lk-muted=true]:from-gray-300 data-[lk-muted=true]:to-gray-200',
                       ])}
                     />
                   </BarVisualizer>
@@ -168,7 +168,7 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                     maskImage:
                       'radial-gradient(circle, rgba(0, 0, 0, 1) 0, rgba(0, 0, 0, 1) 500px, transparent 500px)',
                     filter: 'blur(0px)',
-                    borderRadius: chatOpen ? 16 : 20,
+                    borderRadius: chatOpen ? 24 : 28,
                   }}
                   transition={{
                     ...ANIMATION_TRANSITION,
@@ -182,8 +182,8 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                   }}
                   className={cn(
                     'overflow-hidden shadow-xl',
-                    'border-2 border-violet-500/30',
-                    'shadow-[0_0_30px_rgba(139,92,246,0.2)]',
+                    'border-4 border-blue-200',
+                    'shadow-[0_8px_30px_rgba(59,130,246,0.3)]',
                     chatOpen ? 'h-[90px]' : 'h-auto w-full'
                   )}
                 >
@@ -228,13 +228,13 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                     ...ANIMATION_TRANSITION,
                     delay: animationDelay,
                   }}
-                  className="shadow-lg shadow-violet-500/20"
+                  className="shadow-xl shadow-purple-200/50"
                 >
                   <VideoTrack
                     trackRef={cameraTrack || screenShareTrack}
                     width={(cameraTrack || screenShareTrack)?.publication.dimensions?.width ?? 0}
                     height={(cameraTrack || screenShareTrack)?.publication.dimensions?.height ?? 0}
-                    className="aspect-square w-[90px] rounded-xl object-cover border-2 border-cyan-500/30 bg-slate-900"
+                    className="aspect-square w-[90px] rounded-3xl object-cover border-4 border-purple-200 bg-purple-50"
                   />
                 </MotionContainer>
               )}

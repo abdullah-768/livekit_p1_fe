@@ -159,7 +159,7 @@
     }
   }
 
-  /* Kids Welcome Page Animations */
+  /* Kids Learning App Animations */
   .animate-gradient-shift {
     animation: gradient-shift 8s ease infinite;
   }
@@ -185,7 +185,42 @@
       transform: translateY(0px) rotate(0deg);
     }
     50% {
-      transform: translateY(-20px) rotate(3deg);
+      transform: translateY(-15px) rotate(2deg);
+    }
+  }
+
+  .animate-float-bounce {
+    animation: float-bounce 4s ease-in-out infinite;
+  }
+
+  @keyframes float-bounce {
+    0%, 100% {
+      transform: translateY(0px) scale(1);
+    }
+    25% {
+      transform: translateY(-10px) scale(1.05);
+    }
+    50% {
+      transform: translateY(-5px) scale(1);
+    }
+    75% {
+      transform: translateY(-15px) scale(1.05);
+    }
+  }
+
+  .animate-float-bubble {
+    animation: float-bubble 5s ease-in-out infinite;
+  }
+
+  @keyframes float-bubble {
+    0%, 100% {
+      transform: translateY(0px) translateX(0px);
+    }
+    33% {
+      transform: translateY(-12px) translateX(5px);
+    }
+    66% {
+      transform: translateY(-6px) translateX(-5px);
     }
   }
 
@@ -195,12 +230,27 @@
 
   @keyframes pulse-slow {
     0%, 100% {
-      opacity: 0.2;
+      opacity: 0.4;
       transform: scale(1);
     }
     50% {
-      opacity: 0.4;
+      opacity: 0.8;
       transform: scale(1.2);
+    }
+  }
+
+  .animate-sparkle {
+    animation: sparkle 2s ease-in-out infinite;
+  }
+
+  @keyframes sparkle {
+    0%, 100% {
+      transform: scale(1) rotate(0deg);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scale(1.3) rotate(180deg);
+      opacity: 1;
     }
   }
 
@@ -217,15 +267,18 @@
     }
   }
 
-  /* Chat message appear animation */
+  /* Chat message appear animation - fun bounce */
   .animate-message-appear {
-    animation: message-appear 0.4s ease-out forwards;
+    animation: message-appear 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   }
 
   @keyframes message-appear {
     0% {
       opacity: 0;
-      transform: translateY(15px) scale(0.95);
+      transform: translateY(20px) scale(0.9);
+    }
+    50% {
+      transform: translateY(-5px) scale(1.02);
     }
     100% {
       opacity: 1;
@@ -233,7 +286,7 @@
     }
   }
 
-  /* Bounce animation for buttons */
+  /* Bounce animation for buttons and icons */
   .animate-bounce-soft {
     animation: bounce-soft 2s ease-in-out infinite;
   }
@@ -243,21 +296,52 @@
       transform: translateY(0);
     }
     50% {
-      transform: translateY(-3px);
+      transform: translateY(-5px);
     }
   }
 
-  /* Glow pulse for interactive elements */
+  /* Glow pulse for interactive elements - kid-friendly colors */
   .animate-glow-pulse {
     animation: glow-pulse 2s ease-in-out infinite;
   }
 
   @keyframes glow-pulse {
     0%, 100% {
-      box-shadow: 0 0 15px rgba(139, 92, 246, 0.3), 0 0 30px rgba(6, 182, 212, 0.2);
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.4), 0 0 40px rgba(168, 85, 247, 0.2);
     }
     50% {
-      box-shadow: 0 0 25px rgba(139, 92, 246, 0.5), 0 0 50px rgba(6, 182, 212, 0.3);
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), 0 0 60px rgba(168, 85, 247, 0.4);
+    }
+  }
+
+  /* Wiggle animation for fun elements */
+  .animate-wiggle {
+    animation: wiggle 1s ease-in-out infinite;
+  }
+
+  @keyframes wiggle {
+    0%, 100% {
+      transform: rotate(-3deg);
+    }
+    50% {
+      transform: rotate(3deg);
+    }
+  }
+
+  /* Pop animation for appearing elements */
+  .animate-pop {
+    animation: pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @keyframes pop {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
     }
   }
 }
