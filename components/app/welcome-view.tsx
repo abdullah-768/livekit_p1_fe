@@ -42,7 +42,7 @@ export const WelcomeView = ({
       <section className="relative z-10 flex h-full flex-col items-center justify-center text-center">
         <WelcomeImage />
 
-        <p className="text-white text-2xl max-w-[40%] pt-1 leading-6 font-medium font-mochibop-demo">{welcomeNote}</p>
+        <p className="text-white text-2xl md:max-w-[40%] pt-1 leading-6 font-medium font-mochibop-demo">{welcomeNote}</p>
 
         {/* Custom styled button matching reference design */}
         <button
