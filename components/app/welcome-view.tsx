@@ -33,11 +33,11 @@ export const WelcomeView = ({
   return (
     <div
       ref={ref}
-      className="fixed inset-0 w-full h-full bg-[length:100%_100%] bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/welcome-bg-2.jpg')" }}
+      className="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url('/welcome-bg.jpg')" }}
     >
       {/* Semi-transparent overlay for better text readability */}
-      <div className="absolute inset-0 bg-black/30" />
+      <div className="absolute inset-0 bg-black/20" />
 
       <section className="relative z-10 flex h-full flex-col items-center justify-center text-center">
         <WelcomeImage />
