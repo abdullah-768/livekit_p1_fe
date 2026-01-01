@@ -42,26 +42,32 @@ export const WelcomeView = ({
       <section className="relative z-10 flex h-full flex-col items-center justify-center text-center">
         <WelcomeImage />
 
-        <p className="text-white max-w-prose pt-1 leading-6 font-medium">{welcomeNote}</p>
+        <p className="text-white text-2xl max-w-[40%] pt-1 leading-6 font-medium font-mochibop-demo">{welcomeNote}</p>
 
-        <Button variant="primary" size="lg" onClick={onStartCall} className="mt-6 w-64 font-mono">
-          {startButtonText}
-        </Button>
+        {/* Custom styled button matching reference design */}
+        <button
+          onClick={onStartCall}
+          className="mt-6 group relative cursor-pointer"
+        >
+          {/* Outer ring/border - light purple */}
+          <div className="absolute inset-0 bg-gradient-to-b from-indigo-200 via-purple-200 to-indigo-300 rounded-full shadow-lg"></div>
+
+          {/* Inner button with blue gradient */}
+          <div className="relative m-[6px] px-14 py-3 bg-gradient-to-b from-cyan-400 via-sky-500 to-blue-600 rounded-full shadow-inner transform group-hover:scale-[1.02] group-active:scale-[0.98] transition-transform duration-200">
+            <span className="text-white text-xl tracking-widest drop-shadow-md font-beachday">
+              {startButtonText}
+            </span>
+          </div>
+        </button>
       </section>
 
-      <div className="fixed bottom-5 left-0 flex w-full items-center justify-center z-10">
-        <p className="text-white/70 max-w-prose pt-1 text-xs leading-5 font-normal text-pretty md:text-sm">
-          Need help getting set up? Check out the{' '}
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://docs.livekit.io/agents/start/voice-ai/"
-            className="underline hover:text-white"
-          >
-            Voice AI quickstart
-          </a>
-          .
-        </p>
+      {/* Bottom footer - made friendlier */}
+      <div className="fixed bottom-4 left-0 flex w-full items-center justify-center z-10 px-4">
+        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-full px-5 py-2.5 shadow-lg">
+          <p className="text-slate-600 dark:text-slate-300 text-xs md:text-sm font-medium">
+            ✨ Powered by Diya Interactive • Built for Students like you 💜
+          </p>
+        </div>
       </div>
     </div>
   );

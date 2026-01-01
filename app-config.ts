@@ -34,9 +34,9 @@ export const APP_CONFIG_DEFAULTS: AppConfig = {
   accent: '#002cf2',
   logoDark: '/vlc-logo.png',
   accentDark: '#1fd5f9',
-  startButtonText: 'Tap to learn about cells',
+  startButtonText: "Let's talk about cells.",
   welcomeNote:
-    'Hi Abdullah I am here to help you learn about cells. Ask me anything about cell structure, functions, and more!',
+    'Hi Abdullah! I am here to help you learn about cells. Ask me anything about cell structure, functions, and more!',
 
   // for LiveKit Cloud Sandbox
   sandboxId: undefined,

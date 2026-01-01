@@ -24,18 +24,18 @@ export default async function Layout({ children }: LayoutProps) {
           <img
             src={logoDark ?? logo}
             alt={`${companyName} Logo`}
-            className="hidden size-40 dark:block"
+            className="hidden size-56 dark:block"
           />
         </a>
         <span className="text-foreground font-mono text-xs font-bold tracking-wider uppercase">
-          Built with{' '}
+          Grow with{' '}
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://docs.livekit.io/agents"
+            href="https://www.vlc.org.pk/"
             className="underline underline-offset-4"
           >
-            LiveKit Agents
+            Veritas Learning Circle
           </a>
         </span>
       </header>

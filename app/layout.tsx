@@ -38,6 +38,18 @@ const commitMono = localFont({
   ],
 });
 
+const beachday = localFont({
+  display: 'swap',
+  variable: '--font-beachday',
+  src: '../fonts/beachday.otf',
+});
+
+const mochibopDemo = localFont({
+  display: 'swap',
+  variable: '--font-mochibop-demo',
+  src: '../fonts/Mochibop-Demo.ttf',
+});
+
 interface RootLayoutProps {
   children: React.ReactNode;
 }
@@ -55,6 +67,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       className={cn(
         publicSans.variable,
         commitMono.variable,
+        beachday.variable,
+        mochibopDemo.variable,
         'scroll-smooth font-sans antialiased'
       )}
     >
