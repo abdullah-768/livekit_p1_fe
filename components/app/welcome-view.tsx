@@ -2,204 +2,94 @@
 
 import { useEffect, useState } from 'react';
 
-// Fun Robot Buddy Character for Class 7-8 students
-function RobotBuddy() {
+// Modern AI Assistant Icon
+function AIAssistantIcon() {
   return (
     <svg
-      width="180"
-      height="200"
-      viewBox="0 0 180 200"
+      width="120"
+      height="120"
+      viewBox="0 0 120 120"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className="drop-shadow-2xl"
     >
-      {/* Glow effect behind robot */}
-      <ellipse cx="90" cy="185" rx="50" ry="8" fill="url(#shadowGrad)" opacity="0.4">
-        <animate attributeName="rx" values="50;55;50" dur="2s" repeatCount="indefinite"/>
-      </ellipse>
+      {/* Outer glow ring */}
+      <circle cx="60" cy="60" r="55" stroke="url(#gradient1)" strokeWidth="2" opacity="0.5">
+        <animate attributeName="r" values="55;58;55" dur="3s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0.8;0.5" dur="3s" repeatCount="indefinite"/>
+      </circle>
       
-      {/* Antenna */}
-      <g className="origin-bottom">
-        <line x1="90" y1="35" x2="90" y2="15" stroke="url(#antennaGrad)" strokeWidth="4" strokeLinecap="round">
-          <animate attributeName="y2" values="15;12;15" dur="2s" repeatCount="indefinite"/>
-        </line>
-        <circle cx="90" cy="10" r="6" fill="url(#antennaBallGrad)">
-          <animate attributeName="r" values="6;7;6" dur="1.5s" repeatCount="indefinite"/>
-          <animate attributeName="cy" values="10;7;10" dur="2s" repeatCount="indefinite"/>
-        </circle>
-        {/* Antenna glow */}
-        <circle cx="90" cy="10" r="10" fill="cyan" opacity="0.3">
-          <animate attributeName="opacity" values="0.3;0.6;0.3" dur="1.5s" repeatCount="indefinite"/>
-          <animate attributeName="r" values="10;12;10" dur="1.5s" repeatCount="indefinite"/>
-        </circle>
-      </g>
-
-      {/* Robot Head */}
-      <rect x="40" y="35" width="100" height="75" rx="20" fill="url(#headGrad)" stroke="url(#headStroke)" strokeWidth="2"/>
+      {/* Main circle */}
+      <circle cx="60" cy="60" r="48" fill="url(#gradient2)" />
       
-      {/* Head shine effect */}
-      <rect x="45" y="40" width="40" height="8" rx="4" fill="white" opacity="0.15"/>
+      {/* Inner circle */}
+      <circle cx="60" cy="60" r="40" fill="url(#gradient3)" opacity="0.9"/>
       
-      {/* Face screen background */}
-      <rect x="50" y="50" width="80" height="45" rx="12" fill="url(#screenGrad)" opacity="0.9"/>
-      
-      {/* Eyes */}
-      <g>
-        {/* Left eye */}
-        <ellipse cx="70" cy="70" rx="12" ry="12" fill="white">
-          <animate attributeName="ry" values="12;1;12" dur="4s" repeatCount="indefinite" begin="0s" keyTimes="0;0.05;0.1" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" calcMode="spline"/>
-        </ellipse>
-        <circle cx="72" cy="68" r="6" fill="url(#pupilGrad)">
-          <animate attributeName="cx" values="72;68;72;76;72" dur="5s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="74" cy="66" r="2" fill="white" opacity="0.9"/>
+      {/* AI Brain Pattern */}
+      <g opacity="0.9">
+        {/* Center node */}
+        <circle cx="60" cy="60" r="8" fill="white"/>
         
-        {/* Right eye */}
-        <ellipse cx="110" cy="70" rx="12" ry="12" fill="white">
-          <animate attributeName="ry" values="12;1;12" dur="4s" repeatCount="indefinite" begin="0s" keyTimes="0;0.05;0.1" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" calcMode="spline"/>
-        </ellipse>
-        <circle cx="112" cy="68" r="6" fill="url(#pupilGrad)">
-          <animate attributeName="cx" values="112;108;112;116;112" dur="5s" repeatCount="indefinite"/>
+        {/* Connection lines */}
+        <line x1="60" y1="52" x2="60" y2="35" stroke="white" strokeWidth="2" strokeLinecap="round">
+          <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+        </line>
+        <line x1="60" y1="68" x2="60" y2="85" stroke="white" strokeWidth="2" strokeLinecap="round">
+          <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite" begin="0.3s"/>
+        </line>
+        <line x1="52" y1="60" x2="35" y2="60" stroke="white" strokeWidth="2" strokeLinecap="round">
+          <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite" begin="0.6s"/>
+        </line>
+        <line x1="68" y1="60" x2="85" y2="60" stroke="white" strokeWidth="2" strokeLinecap="round">
+          <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite" begin="0.9s"/>
+        </line>
+        
+        {/* Diagonal lines */}
+        <line x1="54" y1="54" x2="42" y2="42" stroke="white" strokeWidth="1.5" strokeLinecap="round" opacity="0.7"/>
+        <line x1="66" y1="54" x2="78" y2="42" stroke="white" strokeWidth="1.5" strokeLinecap="round" opacity="0.7"/>
+        <line x1="54" y1="66" x2="42" y2="78" stroke="white" strokeWidth="1.5" strokeLinecap="round" opacity="0.7"/>
+        <line x1="66" y1="66" x2="78" y2="78" stroke="white" strokeWidth="1.5" strokeLinecap="round" opacity="0.7"/>
+        
+        {/* Outer nodes */}
+        <circle cx="60" cy="32" r="4" fill="white">
+          <animate attributeName="r" values="4;5;4" dur="2s" repeatCount="indefinite"/>
         </circle>
-        <circle cx="114" cy="66" r="2" fill="white" opacity="0.9"/>
+        <circle cx="60" cy="88" r="4" fill="white">
+          <animate attributeName="r" values="4;5;4" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+        </circle>
+        <circle cx="32" cy="60" r="4" fill="white">
+          <animate attributeName="r" values="4;5;4" dur="2s" repeatCount="indefinite" begin="1s"/>
+        </circle>
+        <circle cx="88" cy="60" r="4" fill="white">
+          <animate attributeName="r" values="4;5;4" dur="2s" repeatCount="indefinite" begin="1.5s"/>
+        </circle>
+        
+        {/* Corner nodes */}
+        <circle cx="40" cy="40" r="3" fill="white" opacity="0.8"/>
+        <circle cx="80" cy="40" r="3" fill="white" opacity="0.8"/>
+        <circle cx="40" cy="80" r="3" fill="white" opacity="0.8"/>
+        <circle cx="80" cy="80" r="3" fill="white" opacity="0.8"/>
       </g>
       
-      {/* Happy mouth / smile */}
-      <path d="M75 85 Q90 95 105 85" stroke="white" strokeWidth="3" strokeLinecap="round" fill="none">
-        <animate attributeName="d" values="M75 85 Q90 95 105 85;M75 87 Q90 92 105 87;M75 85 Q90 95 105 85" dur="3s" repeatCount="indefinite"/>
-      </path>
-      
-      {/* Ear lights */}
-      <circle cx="35" cy="70" r="8" fill="url(#earGrad)">
-        <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="145" cy="70" r="8" fill="url(#earGrad)">
-        <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite" begin="1s"/>
-      </circle>
-
-      {/* Neck */}
-      <rect x="75" y="110" width="30" height="15" rx="4" fill="url(#neckGrad)"/>
-      <rect x="80" y="112" width="20" height="3" rx="1" fill="white" opacity="0.2"/>
-
-      {/* Body */}
-      <rect x="45" y="125" width="90" height="55" rx="15" fill="url(#bodyGrad)" stroke="url(#bodyStroke)" strokeWidth="2"/>
-      
-      {/* Body details - chest panel */}
-      <rect x="60" y="135" width="60" height="35" rx="8" fill="url(#chestGrad)" opacity="0.8"/>
-      
-      {/* Heart/Core */}
-      <circle cx="90" cy="150" r="10" fill="url(#coreGrad)">
-        <animate attributeName="r" values="10;11;10" dur="1s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="90" cy="150" r="15" stroke="cyan" strokeWidth="1" fill="none" opacity="0.5">
-        <animate attributeName="r" values="15;18;15" dur="1s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0.5;0.2;0.5" dur="1s" repeatCount="indefinite"/>
-      </circle>
-      
-      {/* Status lights on chest */}
-      <circle cx="70" cy="160" r="3" fill="#10B981">
-        <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="90" cy="165" r="3" fill="#06B6D4">
-        <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite" begin="0.5s"/>
-      </circle>
-      <circle cx="110" cy="160" r="3" fill="#8B5CF6">
-        <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite" begin="1s"/>
-      </circle>
-
-      {/* Arms */}
-      {/* Left arm */}
-      <g>
-        <rect x="20" y="130" width="25" height="40" rx="10" fill="url(#armGrad)">
-          <animateTransform attributeName="transform" type="rotate" values="-2 32 130;2 32 130;-2 32 130" dur="3s" repeatCount="indefinite"/>
-        </rect>
-        {/* Left hand */}
-        <circle cx="32" cy="175" r="10" fill="url(#handGrad)">
-          <animateTransform attributeName="transform" type="rotate" values="-2 32 130;2 32 130;-2 32 130" dur="3s" repeatCount="indefinite"/>
-        </circle>
-      </g>
-      
-      {/* Right arm - waving */}
-      <g>
-        <rect x="135" y="130" width="25" height="40" rx="10" fill="url(#armGrad)">
-          <animateTransform attributeName="transform" type="rotate" values="5 148 130;-10 148 130;5 148 130" dur="2s" repeatCount="indefinite"/>
-        </rect>
-        {/* Right hand */}
-        <circle cx="148" cy="175" r="10" fill="url(#handGrad)">
-          <animateTransform attributeName="transform" type="rotate" values="5 148 130;-10 148 130;5 148 130" dur="2s" repeatCount="indefinite"/>
-        </circle>
-      </g>
-
       {/* Gradients */}
       <defs>
-        <linearGradient id="shadowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="transparent"/>
+        <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#8B5CF6"/>
+          <stop offset="100%" stopColor="#06B6D4"/>
+        </linearGradient>
+        <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#7C3AED"/>
           <stop offset="50%" stopColor="#8B5CF6"/>
-          <stop offset="100%" stopColor="transparent"/>
-        </linearGradient>
-        <linearGradient id="antennaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#06B6D4"/>
-          <stop offset="100%" stopColor="#8B5CF6"/>
-        </linearGradient>
-        <radialGradient id="antennaBallGrad" cx="30%" cy="30%">
-          <stop offset="0%" stopColor="#22D3EE"/>
           <stop offset="100%" stopColor="#06B6D4"/>
-        </radialGradient>
-        <linearGradient id="headGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#4C1D95"/>
-          <stop offset="50%" stopColor="#5B21B6"/>
-          <stop offset="100%" stopColor="#1E3A5F"/>
         </linearGradient>
-        <linearGradient id="headStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#8B5CF6"/>
-          <stop offset="100%" stopColor="#06B6D4"/>
+          <stop offset="100%" stopColor="#0EA5E9"/>
         </linearGradient>
-        <linearGradient id="screenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#1E293B"/>
-          <stop offset="100%" stopColor="#0F172A"/>
-        </linearGradient>
-        <radialGradient id="pupilGrad" cx="30%" cy="30%">
-          <stop offset="0%" stopColor="#8B5CF6"/>
-          <stop offset="100%" stopColor="#4C1D95"/>
-        </radialGradient>
-        <radialGradient id="earGrad" cx="30%" cy="30%">
-          <stop offset="0%" stopColor="#22D3EE"/>
-          <stop offset="100%" stopColor="#0891B2"/>
-        </radialGradient>
-        <linearGradient id="neckGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#374151"/>
-          <stop offset="100%" stopColor="#1F2937"/>
-        </linearGradient>
-        <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#4C1D95"/>
-          <stop offset="50%" stopColor="#5B21B6"/>
-          <stop offset="100%" stopColor="#1E3A5F"/>
-        </linearGradient>
-        <linearGradient id="bodyStroke" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#8B5CF6"/>
-          <stop offset="100%" stopColor="#06B6D4"/>
-        </linearGradient>
-        <linearGradient id="chestGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#1E293B"/>
-          <stop offset="100%" stopColor="#0F172A"/>
-        </linearGradient>
-        <radialGradient id="coreGrad" cx="30%" cy="30%">
-          <stop offset="0%" stopColor="#22D3EE"/>
-          <stop offset="100%" stopColor="#06B6D4"/>
-        </radialGradient>
-        <linearGradient id="armGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#5B21B6"/>
-          <stop offset="100%" stopColor="#4C1D95"/>
-        </linearGradient>
-        <radialGradient id="handGrad" cx="30%" cy="30%">
-          <stop offset="0%" stopColor="#6D28D9"/>
-          <stop offset="100%" stopColor="#4C1D95"/>
-        </radialGradient>
       </defs>
     </svg>
   );
 }
-
 
 // Floating geometric shapes
 function FloatingShape({ className, delay = '0s', type = 'circle' }: { className?: string; delay?: string; type?: 'circle' | 'square' | 'triangle' | 'hexagon' }) {
@@ -328,13 +218,11 @@ export const WelcomeView = ({
 
       {/* Main Content */}
       <section className="relative z-10 flex min-h-screen flex-col items-center justify-center px-4 text-center">
-        {/* Robot Buddy with glow effect */}
-        <div className="relative mb-6 animate-float-gentle">
-          <div className="absolute inset-0 blur-3xl bg-gradient-to-r from-violet-600/40 to-cyan-600/40 rounded-full scale-125" />
-          <RobotBuddy />
+        {/* AI Icon with glow effect */}
+        <div className="relative mb-8">
+          <div className="absolute inset-0 blur-3xl bg-gradient-to-r from-violet-600/30 to-cyan-600/30 rounded-full scale-150" />
+          <AIAssistantIcon />
         </div>
-
-        
 
         {/* Title */}
         <h1 className="mb-3 text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl">
