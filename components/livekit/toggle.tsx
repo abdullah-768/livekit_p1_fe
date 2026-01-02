@@ -9,30 +9,38 @@ const toggleVariants = cva(
   [
     'inline-flex items-center justify-center gap-2 rounded-full',
     'text-sm font-medium whitespace-nowrap',
-    'cursor-pointer outline-none transition-[color,box-shadow,background-color]',
-    'hover:bg-muted hover:text-muted-foreground',
+    'cursor-pointer outline-none transition-all duration-300',
+    'hover:scale-105 active:scale-95',
     'disabled:pointer-events-none disabled:opacity-50',
-    'data-[state=on]:bg-accent data-[state=on]:text-accent-foreground',
-    'focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:border-ring',
-    'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive ',
+    'focus-visible:ring-[oklch(0.7_0.2_280)] focus-visible:ring-[3px] focus-visible:ring-offset-2',
     "[&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0",
   ],
   {
     variants: {
       variant: {
-        default: 'bg-transparent',
-        primary:
-          'bg-muted data-[state=on]:bg-muted hover:text-foreground text-destructive hover:text-foreground hover:bg-foreground/10 hover:data-[state=on]:bg-foreground/10',
-        secondary:
-          'bg-muted data-[state=on]:bg-muted hover:text-foreground hover:bg-foreground/10 hover:data-[state=on]:bg-foreground/10 data-[state=on]:bg-blue-500/20 data-[state=on]:hover:bg-blue-500/30 data-[state=on]:text-blue-700 dark:data-[state=on]:text-blue-300',
-        outline:
-          'border border-input bg-transparent shadow-xs hover:bg-accent hover:text-accent-foreground',
+        default: 'bg-transparent hover:bg-[oklch(0.92_0.05_280)]',
+        primary: [
+          'bg-[oklch(0.92_0.05_280)] text-[oklch(0.65_0.2_25)]',
+          'hover:bg-[oklch(0.88_0.08_280)]',
+          'data-[state=on]:bg-[oklch(0.85_0.15_150)] data-[state=on]:text-[oklch(0.25_0.1_150)]',
+        ],
+        secondary: [
+          'bg-[oklch(0.92_0.05_280)] text-[oklch(0.4_0.1_280)]',
+          'hover:bg-[oklch(0.88_0.08_280)]',
+          'data-[state=on]:bg-gradient-to-r data-[state=on]:from-[oklch(0.75_0.15_240)] data-[state=on]:to-[oklch(0.7_0.18_260)]',
+          'data-[state=on]:text-white data-[state=on]:shadow-md data-[state=on]:shadow-[oklch(0.7_0.15_240/0.3)]',
+        ],
+        outline: [
+          'border-2 border-[oklch(0.85_0.1_280)] bg-white/80',
+          'hover:bg-[oklch(0.95_0.05_280)] hover:border-[oklch(0.75_0.15_280)]',
+          'data-[state=on]:border-[oklch(0.65_0.25_280)] data-[state=on]:bg-[oklch(0.9_0.1_280)]',
+        ],
       },
       size: {
-        default: 'h-9 px-4 py-2 has-[>svg]:px-3',
-        sm: 'h-8 gap-1.5 px-3 has-[>svg]:px-2.5',
-        lg: 'h-10 px-6 has-[>svg]:px-4',
-        icon: 'size-9',
+        default: 'h-10 px-5 py-2 has-[>svg]:px-4',
+        sm: 'h-9 gap-1.5 px-4 has-[>svg]:px-3',
+        lg: 'h-11 px-7 has-[>svg]:px-5',
+        icon: 'size-10',
       },
     },
     defaultVariants: {

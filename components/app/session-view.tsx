@@ -47,9 +47,9 @@ export function Fade({ top = false, bottom = false, className }: FadeProps) {
   return (
     <div
       className={cn(
-        'from-background pointer-events-none h-4 bg-linear-to-b to-transparent',
-        top && 'bg-linear-to-b',
-        bottom && 'bg-linear-to-t',
+        'from-background/90 pointer-events-none h-4 bg-linear-to-b to-transparent',
+        top && 'bg-linear-to-b from-[oklch(0.98_0.01_280/0.95)]',
+        bottom && 'bg-linear-to-t from-[oklch(0.98_0.01_280/0.95)]',
         className
       )}
     />
@@ -87,7 +87,7 @@ export const SessionView = ({
   }, [messages]);
 
   return (
-    <section className="bg-background relative z-10 h-full w-full overflow-hidden" {...props}>
+    <section className="relative z-10 h-full w-full overflow-hidden bg-gradient-to-br from-[oklch(0.98_0.02_280)] via-[oklch(0.97_0.03_200)] to-[oklch(0.98_0.02_150)]" {...props}>
       {/* Chat Transcript */}
       <div
         className={cn(
@@ -100,7 +100,7 @@ export const SessionView = ({
           <ChatTranscript
             hidden={!chatOpen}
             messages={messages}
-            className="mx-auto max-w-2xl space-y-3 transition-opacity duration-300 ease-out"
+            className="mx-auto max-w-2xl space-y-4 transition-opacity duration-300 ease-out"
           />
         </ScrollArea>
       </div>
@@ -116,7 +116,7 @@ export const SessionView = ({
         {appConfig.isPreConnectBufferEnabled && (
           <PreConnectMessage messages={messages} className="pb-4" />
         )}
-        <div className="bg-background relative mx-auto max-w-2xl pb-3 md:pb-12">
+        <div className="relative mx-auto max-w-2xl pb-3 md:pb-12">
           <Fade bottom className="absolute inset-x-0 top-0 h-4 -translate-y-full" />
           <AgentControlBar
             controls={controls}

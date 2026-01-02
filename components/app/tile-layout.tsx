@@ -123,8 +123,10 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                     delay: animationDelay,
                   }}
                   className={cn(
-                    'bg-background aspect-square h-[90px] rounded-md border border-transparent transition-[border,drop-shadow]',
-                    chatOpen && 'border-input/50 drop-shadow-lg/10 delay-200'
+                    'aspect-square h-[90px] rounded-2xl transition-[border,drop-shadow]',
+                    'bg-gradient-to-br from-[oklch(0.95_0.05_280)] via-[oklch(0.92_0.08_200)] to-[oklch(0.95_0.05_150)]',
+                    'border-2 border-transparent',
+                    chatOpen && 'border-[oklch(0.85_0.12_280)] shadow-lg shadow-[oklch(0.7_0.2_280/0.2)] delay-200'
                   )}
                 >
                   <BarVisualizer
@@ -132,13 +134,15 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                     state={agentState}
                     options={{ minHeight: 5 }}
                     trackRef={agentAudioTrack}
-                    className={cn('flex h-full items-center justify-center gap-1')}
+                    className={cn('flex h-full items-center justify-center gap-1.5')}
                   >
                     <span
                       className={cn([
-                        'bg-muted min-h-2.5 w-2.5 rounded-full',
+                        'min-h-3 w-3 rounded-full',
+                        'bg-[oklch(0.85_0.1_280)]',
                         'origin-center transition-colors duration-250 ease-linear',
-                        'data-[lk-highlighted=true]:bg-foreground data-[lk-muted=true]:bg-muted',
+                        'data-[lk-highlighted=true]:bg-gradient-to-t data-[lk-highlighted=true]:from-[oklch(0.65_0.25_280)] data-[lk-highlighted=true]:to-[oklch(0.75_0.2_300)]',
+                        'data-[lk-muted=true]:bg-[oklch(0.9_0.05_280)]',
                       ])}
                     />
                   </BarVisualizer>
@@ -161,7 +165,7 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                     maskImage:
                       'radial-gradient(circle, rgba(0, 0, 0, 1) 0, rgba(0, 0, 0, 1) 500px, transparent 500px)',
                     filter: 'blur(0px)',
-                    borderRadius: chatOpen ? 6 : 12,
+                    borderRadius: chatOpen ? 16 : 24,
                   }}
                   transition={{
                     ...ANIMATION_TRANSITION,
@@ -174,7 +178,9 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                     },
                   }}
                   className={cn(
-                    'overflow-hidden bg-black drop-shadow-xl/80',
+                    'overflow-hidden shadow-xl shadow-[oklch(0.7_0.2_280/0.25)]',
+                    'bg-gradient-to-br from-[oklch(0.95_0.05_280)] to-[oklch(0.9_0.08_200)]',
+                    'border-2 border-[oklch(0.85_0.12_280)]',
                     chatOpen ? 'h-[90px]' : 'h-auto w-full'
                   )}
                 >
@@ -219,13 +225,13 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                     ...ANIMATION_TRANSITION,
                     delay: animationDelay,
                   }}
-                  className="drop-shadow-lg/20"
+                  className="shadow-lg shadow-[oklch(0.7_0.2_280/0.2)] rounded-2xl overflow-hidden border-2 border-[oklch(0.85_0.12_280)]"
                 >
                   <VideoTrack
                     trackRef={cameraTrack || screenShareTrack}
                     width={(cameraTrack || screenShareTrack)?.publication.dimensions?.width ?? 0}
                     height={(cameraTrack || screenShareTrack)?.publication.dimensions?.height ?? 0}
-                    className="bg-muted aspect-square w-[90px] rounded-md object-cover"
+                    className="bg-gradient-to-br from-[oklch(0.95_0.05_280)] to-[oklch(0.9_0.08_200)] aspect-square w-[90px] rounded-xl object-cover"
                   />
                 </MotionContainer>
               )}
