@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
-import { useSessionContext, useSessionMessages } from '@livekit/components-react';
+import { useSessionContext, useSessionMessages, useDataChannel } from '@livekit/components-react';
 import type { AppConfig } from '@/app-config';
 import { ChatTranscript } from '@/components/app/chat-transcript';
 import { PreConnectMessage } from '@/components/app/preconnect-message';
@@ -13,8 +13,6 @@ import {
 } from '@/components/livekit/agent-control-bar/agent-control-bar';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '../livekit/scroll-area/scroll-area';
-import { useDataChannel } from '@livekit/components-react';
-import { AnimatePresence } from 'motion/react';
 
 const MotionBottom = motion.create('div');
 
@@ -119,59 +117,14 @@ export const SessionView = ({
           <ChatTranscript
             hidden={!chatOpen}
             messages={messages}
+            activeImage={activeImage}
             className="mx-auto max-w-2xl space-y-4 transition-opacity duration-300 ease-out"
           />
         </ScrollArea>
       </div>
 
       {/* Tile Layout */}
-      {/* <TileLayout chatOpen={chatOpen} /> */}
-
-      {/* Add new code */}
-      <div className="relative flex h-full w-full">
-      {/* LEFT: Existing Tile Layout */}
-      <div
-        className={cn(
-          'transition-all duration-300',
-          activeImage ? 'w-full md:w-1/2' : 'w-full'
-        )}
-      >
-        <TileLayout chatOpen={chatOpen} />
-      </div>
-
-      {/* RIGHT: Image Panel */}
-      <AnimatePresence>
-        {activeImage && (
-          <motion.div
-            initial={{ x: '100%', opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: '100%', opacity: 0 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="hidden md:flex w-1/2 border-l border-black/10 bg-white/60 backdrop-blur-xl p-6 items-center justify-center"
-          >
-            <div className="w-full max-w-lg space-y-4">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold">
-                  {activeImage.title}
-                </h3>
-                <button
-                  onClick={() => setActiveImage(null)}
-                  className="rounded-full px-2 text-gray-500 hover:text-black"
-                >
-                  ✕
-                </button>
-              </div>
-
-              <img
-                src={activeImage.url}
-                alt={activeImage.title}
-                className="w-full rounded-xl border bg-white object-contain"
-              />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+      <TileLayout chatOpen={chatOpen} />
 
       {/* Bottom */}
       <MotionBottom
