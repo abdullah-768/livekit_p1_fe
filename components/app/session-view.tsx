@@ -13,6 +13,8 @@ import {
 } from '@/components/livekit/agent-control-bar/agent-control-bar';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '../livekit/scroll-area/scroll-area';
+import { useDataChannel } from '@livekit/components-react';
+import { AnimatePresence } from 'motion/react';
 
 const MotionBottom = motion.create('div');
 
@@ -68,6 +70,11 @@ export const SessionView = ({
   const { messages } = useSessionMessages(session);
   const [chatOpen, setChatOpen] = useState(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const [activeImage, setActiveImage] = useState<{
+    url: string;
+    title: string;
+  } | null>(null);
+
 
   const controls: ControlBarControls = {
     leave: true,
@@ -76,6 +83,18 @@ export const SessionView = ({
     camera: appConfig.supportsVideoInput,
     screenShare: appConfig.supportsVideoInput,
   };
+
+  useDataChannel((message) => {
+    const data = JSON.parse(new TextDecoder().decode(message.payload));
+
+    if (data.type === 'show_image') {
+      setActiveImage({ url: data.url, title: data.title });
+    }
+
+    if (data.type === 'close_image') {
+      setActiveImage(null);
+    }
+  });
 
   useEffect(() => {
     const lastMessage = messages.at(-1);
@@ -106,7 +125,53 @@ export const SessionView = ({
       </div>
 
       {/* Tile Layout */}
-      <TileLayout chatOpen={chatOpen} />
+      {/* <TileLayout chatOpen={chatOpen} /> */}
+
+      {/* Add new code */}
+      <div className="relative flex h-full w-full">
+      {/* LEFT: Existing Tile Layout */}
+      <div
+        className={cn(
+          'transition-all duration-300',
+          activeImage ? 'w-full md:w-1/2' : 'w-full'
+        )}
+      >
+        <TileLayout chatOpen={chatOpen} />
+      </div>
+
+      {/* RIGHT: Image Panel */}
+      <AnimatePresence>
+        {activeImage && (
+          <motion.div
+            initial={{ x: '100%', opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: '100%', opacity: 0 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="hidden md:flex w-1/2 border-l border-black/10 bg-white/60 backdrop-blur-xl p-6 items-center justify-center"
+          >
+            <div className="w-full max-w-lg space-y-4">
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold">
+                  {activeImage.title}
+                </h3>
+                <button
+                  onClick={() => setActiveImage(null)}
+                  className="rounded-full px-2 text-gray-500 hover:text-black"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <img
+                src={activeImage.url}
+                alt={activeImage.title}
+                className="w-full rounded-xl border bg-white object-contain"
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
 
       {/* Bottom */}
       <MotionBottom
