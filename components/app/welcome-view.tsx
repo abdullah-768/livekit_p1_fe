@@ -34,15 +34,15 @@ export const WelcomeView = ({
     <div
       ref={ref}
       className="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/welcome-bg.jpg')" }}
+      style={{ backgroundImage: "url('/welcome-bg-4.jpg')" }}
     >
       {/* Semi-transparent overlay for better text readability */}
       <div className="absolute inset-0 bg-black/20" />
 
-      <section className="relative z-10 flex h-full flex-col items-center justify-center text-center">
+      <section className="px-4 relative z-10 flex h-full flex-col items-center justify-center text-center">
         <WelcomeImage />
 
-        <p className="text-white text-2xl md:max-w-[40%] pt-1 leading-6 font-medium font-mochibop-demo">{welcomeNote}</p>
+        <p className="text-white text-2xl md:text-3xl md:max-w-[80%] lg:max-w-[40%] pt-1 leading-7 font-medium font-mochibop-demo">{welcomeNote}</p>
 
         {/* Custom styled button matching reference design */}
         <button
@@ -65,7 +65,7 @@ export const WelcomeView = ({
       <div className="fixed bottom-4 left-0 flex w-full items-center justify-center z-10 px-4">
         <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-full px-5 py-2.5 shadow-lg">
           <p className="text-slate-600 dark:text-slate-300 text-xs md:text-sm font-medium">
-            ✨ Powered by Diya Interactive • Built for Students like you 💜
+            ✨ Powered by Veritas Learning Circle • Built for Students like you 💜
           </p>
         </div>
       </div>

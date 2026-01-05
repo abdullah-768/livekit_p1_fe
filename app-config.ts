@@ -30,9 +30,9 @@ export const APP_CONFIG_DEFAULTS: AppConfig = {
   supportsScreenShare: true,
   isPreConnectBufferEnabled: true,
 
-  logo: '/vlc-logo.png',
+  logo: '/vlc-logo-dark.png',
   accent: '#002cf2',
-  logoDark: '/vlc-logo.png',
+  logoDark: '/vlc-logo-dark.png',
   accentDark: '#1fd5f9',
   startButtonText: "Let's talk about cells.",
   welcomeNote:
