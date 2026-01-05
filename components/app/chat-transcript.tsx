@@ -151,12 +151,6 @@ export function ChatTranscript({
           <span className="text-sm font-semibold text-[oklch(0.4_0.1_200)] flex items-center gap-1.5">
             🖼️ {imageEntry.title}
           </span>
-          <button
-            onClick={() => openModal(imageEntry)}
-            className="text-xs font-medium px-2.5 py-1 rounded-full bg-[oklch(0.65_0.2_280)] text-white hover:bg-[oklch(0.6_0.22_280)] transition-colors flex items-center gap-1 cursor-pointer"
-          >
-            🔍 View Image
-          </button>
         </div>
         <img
           src={imageEntry.url}

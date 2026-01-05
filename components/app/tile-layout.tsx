@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Track } from 'livekit-client';
 import { AnimatePresence, motion } from 'motion/react';
 import {
@@ -71,9 +72,10 @@ export function useLocalTrackRef(source: Track.Source) {
 
 interface TileLayoutProps {
   chatOpen: boolean;
+  activeImage?: { url: string; title: string } | null;
 }
 
-export function TileLayout({ chatOpen }: TileLayoutProps) {
+export function TileLayout({ chatOpen, activeImage }: TileLayoutProps) {
   const {
     state: agentState,
     audioTrack: agentAudioTrack,
@@ -81,6 +83,27 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
   } = useVoiceAssistant();
   const [screenShareTrack] = useTracks([Track.Source.ScreenShare]);
   const cameraTrack: TrackReference | undefined = useLocalTrackRef(Track.Source.Camera);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isWaveformImageHidden, setIsWaveformImageHidden] = useState(false);
+
+  // Detect mobile screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Reset hidden state when a new image is shown
+  useEffect(() => {
+    if (activeImage) {
+      setIsWaveformImageHidden(false);
+    }
+  }, [activeImage?.url]);
 
   const isCameraEnabled = cameraTrack && !cameraTrack.publication.isMuted;
   const isScreenShareEnabled = screenShareTrack && !screenShareTrack.publication.isMuted;
@@ -90,6 +113,28 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
   const isAvatar = agentVideoTrack !== undefined;
   const videoWidth = agentVideoTrack?.publication.dimensions?.width ?? 0;
   const videoHeight = agentVideoTrack?.publication.dimensions?.height ?? 0;
+
+  // Responsive scale: smaller on mobile, larger on desktop
+  const waveformScale = chatOpen ? 1 : (isMobile ? 2.5 : 5);
+
+  const handleDownload = async () => {
+    if (!activeImage) return;
+    
+    try {
+      const response = await fetch(activeImage.url);
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${activeImage.title || 'image'}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      window.open(activeImage.url, '_blank');
+    }
+  };
 
   return (
     <div className="pointer-events-none fixed inset-x-0 top-8 bottom-32 z-50 md:top-12 md:bottom-40">
@@ -116,7 +161,7 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                   }}
                   animate={{
                     opacity: 1,
-                    scale: chatOpen ? 1 : 5,
+                    scale: waveformScale,
                   }}
                   transition={{
                     ...ANIMATION_TRANSITION,
@@ -239,6 +284,132 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
           </div>
         </div>
       </div>
+
+      {/* Image Display for Voice Waveform Screen (when chat is closed) */}
+      <AnimatePresence>
+        {!chatOpen && activeImage && !isWaveformImageHidden && (
+          <MotionContainer
+            key="waveform-image"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+            className={cn(
+              'pointer-events-auto absolute px-4',
+              // Mobile: centered at bottom
+              'inset-x-0 bottom-4 flex justify-center',
+              // Desktop: right side, vertically centered
+              'md:inset-x-auto md:right-4 md:top-1/2 md:-translate-y-1/2 md:bottom-auto'
+            )}
+          >
+            <div className="w-full max-w-[280px] md:max-w-[400px]">
+              <div className="rounded-2xl bg-gradient-to-br from-[oklch(0.98_0.02_180)] to-[oklch(0.95_0.04_150)] p-3 shadow-xl border-2 border-[oklch(0.88_0.08_180)] backdrop-blur-sm relative">
+                {/* Close Button */}
+                
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs md:text-sm font-semibold text-[oklch(0.4_0.1_200)] flex items-center gap-1.5 truncate">
+                    🖼️ {activeImage.title}
+                  </span>
+                </div>
+                <img
+                  src={activeImage.url}
+                  alt={activeImage.title}
+                  onClick={() => setIsModalOpen(true)}
+                  className="w-full max-h-[20vh] md:max-h-[40vh] rounded-xl border border-[oklch(0.9_0.06_180)] bg-white object-contain shadow-sm cursor-pointer hover:opacity-90 transition-opacity"
+                />
+                <div className="flex items-center justify-between mt-3 gap-2">
+                  <button 
+                    onClick={() => setIsModalOpen(true)}
+                    className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-full bg-[oklch(0.65_0.2_280)] text-white text-xs md:text-sm font-medium hover:bg-[oklch(0.6_0.22_280)] transition-colors cursor-pointer shadow-md"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                    </svg>
+                    View Image
+                  </button>
+                  <button 
+                    onClick={() => setIsWaveformImageHidden(true)}
+                    className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-full bg-[oklch(0.92_0.05_280)] text-[oklch(0.4_0.1_280)] text-xs md:text-sm font-medium hover:bg-[oklch(0.88_0.08_280)] transition-colors cursor-pointer"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                    Close
+                  </button>
+                </div>
+              </div>
+              
+            </div>
+          </MotionContainer>
+        )}
+      </AnimatePresence>
+
+      {/* Full-size Image Modal */}
+      {typeof document !== 'undefined' && createPortal(
+        <AnimatePresence>
+          {isModalOpen && activeImage && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 pointer-events-auto"
+              onClick={() => setIsModalOpen(false)}
+            >
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                transition={{ duration: 0.2, ease: 'easeOut' }}
+                className="relative max-w-4xl w-full max-h-[90vh] bg-white rounded-2xl shadow-2xl overflow-hidden pointer-events-auto"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Modal Header */}
+                <div className="flex items-center justify-between p-4 border-b border-[oklch(0.9_0.05_280)]">
+                  <h3 className="text-lg font-semibold text-[oklch(0.3_0.1_280)] flex items-center gap-2">
+                    🖼️ {activeImage.title}
+                  </h3>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleDownload();
+                      }}
+                      className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-[oklch(0.75_0.15_150)] to-[oklch(0.7_0.18_180)] text-white text-sm font-medium hover:from-[oklch(0.7_0.17_150)] hover:to-[oklch(0.65_0.2_180)] transition-all shadow-md cursor-pointer"
+                    >
+                      ⬇️ Download
+                    </button>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setIsModalOpen(false);
+                      }}
+                      className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-[oklch(0.92_0.05_280)] text-[oklch(0.4_0.1_280)] text-sm font-medium hover:bg-[oklch(0.88_0.08_280)] transition-colors cursor-pointer"
+                    >
+                      ✕ Close
+                    </button>
+                  </div>
+                </div>
+                
+                {/* Modal Image */}
+                <div className="p-4 flex items-center justify-center bg-[oklch(0.98_0.02_280)] max-h-[calc(90vh-80px)] overflow-auto">
+                  <img
+                    src={activeImage.url}
+                    alt={activeImage.title}
+                    className="max-w-full max-h-[calc(90vh-120px)] object-contain rounded-xl shadow-lg"
+                  />
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </div>
   );
 }
