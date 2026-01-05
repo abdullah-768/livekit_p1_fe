@@ -225,7 +225,7 @@ export function ChatTranscript({
               >
                 {/* Modal Header */}
                 <div className="flex items-center justify-between p-4 border-b border-[oklch(0.9_0.05_280)]">
-                  <h3 className="text-lg font-semibold text-[oklch(0.3_0.1_280)] flex items-center gap-2">
+                  <h3 className="text-md lg:text-lg font-semibold text-[oklch(0.3_0.1_280)] flex items-center gap-2">
                     🖼️ {modalImage.title}
                   </h3>
                   <div className="flex items-center gap-2">
@@ -236,9 +236,14 @@ export function ChatTranscript({
                         e.stopPropagation();
                         handleDownload(modalImage);
                       }}
-                      className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-[oklch(0.75_0.15_150)] to-[oklch(0.7_0.18_180)] text-white text-sm font-medium hover:from-[oklch(0.7_0.17_150)] hover:to-[oklch(0.65_0.2_180)] transition-all shadow-md cursor-pointer"
+                      className="flex items-center justify-center gap-1.5 px-2 py-2 md:px-4 rounded-full bg-gradient-to-r from-[oklch(0.75_0.15_150)] to-[oklch(0.7_0.18_180)] text-white text-sm font-medium hover:from-[oklch(0.7_0.17_150)] hover:to-[oklch(0.65_0.2_180)] transition-all shadow-md cursor-pointer"
                     >
-                      ⬇️ Download
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                      </svg>
+                      <span className="hidden md:inline">Download</span>
                     </button>
                     <button
                       type="button"
@@ -247,9 +252,13 @@ export function ChatTranscript({
                         e.stopPropagation();
                         setIsModalOpen(false);
                       }}
-                      className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-[oklch(0.92_0.05_280)] text-[oklch(0.4_0.1_280)] text-sm font-medium hover:bg-[oklch(0.88_0.08_280)] transition-colors cursor-pointer"
+                      className="flex items-center justify-center gap-1.5 px-2 py-2 md:px-4 rounded-full bg-[oklch(0.92_0.05_280)] text-[oklch(0.4_0.1_280)] text-sm font-medium hover:bg-[oklch(0.88_0.08_280)] transition-colors cursor-pointer"
                     >
-                      ✕ Close
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                      </svg>
+                      <span className="hidden md:inline">Close</span>
                     </button>
                   </div>
                 </div>
