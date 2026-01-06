@@ -15,27 +15,27 @@ export default async function Layout({ children }: LayoutProps) {
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://livekit.io"
+          href="https://www.vlc.org.pk/"
           className="scale-100 transition-transform duration-300 hover:scale-110"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={logo} alt={`${companyName} Logo`} className="block size-6 dark:hidden" />
+          <img src={logo} alt={`${companyName} Logo`} className="block size-40 dark:hidden" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={logoDark ?? logo}
             alt={`${companyName} Logo`}
-            className="hidden size-6 dark:block"
+            className="hidden size-56 dark:block"
           />
         </a>
         <span className="text-foreground font-mono text-xs font-bold tracking-wider uppercase">
-          Built with{' '}
+          Grow with{' '}
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://docs.livekit.io/agents"
+            href="https://www.vlc.org.pk/"
             className="underline underline-offset-4"
           >
-            LiveKit Agents
+            Veritas Learning Circle
           </a>
         </span>
       </header>

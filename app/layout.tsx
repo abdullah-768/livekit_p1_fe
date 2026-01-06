@@ -2,7 +2,6 @@ import { Public_Sans } from 'next/font/google';
 import localFont from 'next/font/local';
 import { headers } from 'next/headers';
 import { ThemeProvider } from '@/components/app/theme-provider';
-import { ThemeToggle } from '@/components/app/theme-toggle';
 import { cn, getAppConfig, getStyles } from '@/lib/utils';
 import '@/styles/globals.css';
 
@@ -38,6 +37,18 @@ const commitMono = localFont({
   ],
 });
 
+const beachday = localFont({
+  display: 'swap',
+  variable: '--font-beachday',
+  src: '../fonts/beachday.otf',
+});
+
+const mochibopDemo = localFont({
+  display: 'swap',
+  variable: '--font-mochibop-demo',
+  src: '../fonts/Mochibop-Demo.ttf',
+});
+
 interface RootLayoutProps {
   children: React.ReactNode;
 }
@@ -55,6 +66,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       className={cn(
         publicSans.variable,
         commitMono.variable,
+        beachday.variable,
+        mochibopDemo.variable,
         'scroll-smooth font-sans antialiased'
       )}
     >
@@ -66,14 +79,11 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       <body className="overflow-x-hidden" suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
+          forcedTheme="light"
           disableTransitionOnChange
         >
           {children}
-          <div className="group fixed bottom-0 left-1/2 z-50 mb-2 -translate-x-1/2">
-            <ThemeToggle className="translate-y-20 transition-transform delay-150 duration-300 group-hover:translate-y-0" />
-          </div>
         </ThemeProvider>
       </body>
     </html>
