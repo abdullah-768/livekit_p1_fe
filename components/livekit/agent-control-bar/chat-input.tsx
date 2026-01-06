@@ -69,7 +69,7 @@ export function ChatInput({
     >
       <form
         onSubmit={handleSubmit}
-        className="mb-3 flex grow items-end gap-2 rounded-xl pl-2 pt-1 text-sm"
+        className="mb-3 flex grow items-end gap-2 rounded-xl pt-1 pl-2 text-sm"
       >
         <input
           autoFocus
@@ -79,7 +79,7 @@ export function ChatInput({
           disabled={!chatOpen}
           placeholder="Type your message here! 💬"
           onChange={(e) => setMessage(e.target.value)}
-          className="h-10 flex-1 rounded-xl bg-[oklch(0.98_0.02_280)] px-3 text-[oklch(0.3_0.05_280)] placeholder:text-[oklch(0.6_0.1_280)] focus:outline-none focus:ring-2 focus:ring-[oklch(0.7_0.2_280)] disabled:cursor-not-allowed disabled:opacity-50"
+          className="h-10 flex-1 rounded-xl bg-[oklch(0.98_0.02_280)] px-3 text-[oklch(0.3_0.05_280)] placeholder:text-[oklch(0.6_0.1_280)] focus:ring-2 focus:ring-[oklch(0.7_0.2_280)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
         />
         <Button
           size="icon"

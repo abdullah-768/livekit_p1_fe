@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
-import { useSessionContext, useSessionMessages, useDataChannel } from '@livekit/components-react';
+import { useDataChannel, useSessionContext, useSessionMessages } from '@livekit/components-react';
 import type { AppConfig } from '@/app-config';
 import { ChatTranscript } from '@/components/app/chat-transcript';
 import { PreConnectMessage } from '@/components/app/preconnect-message';
@@ -73,7 +73,6 @@ export const SessionView = ({
     title: string;
   } | null>(null);
 
-
   const controls: ControlBarControls = {
     leave: true,
     microphone: true,
@@ -104,7 +103,10 @@ export const SessionView = ({
   }, [messages]);
 
   return (
-    <section className="relative z-10 h-full w-full overflow-hidden bg-gradient-to-br from-[oklch(0.98_0.02_280)] via-[oklch(0.97_0.03_200)] to-[oklch(0.98_0.02_150)]" {...props}>
+    <section
+      className="relative z-10 h-full w-full overflow-hidden bg-gradient-to-br from-[oklch(0.98_0.02_280)] via-[oklch(0.97_0.03_200)] to-[oklch(0.98_0.02_150)]"
+      {...props}
+    >
       {/* Chat Transcript */}
       <div
         className={cn(

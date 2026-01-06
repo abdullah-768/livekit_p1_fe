@@ -33,28 +33,27 @@ export const WelcomeView = ({
   return (
     <div
       ref={ref}
-      className="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
+      className="fixed inset-0 h-full w-full bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: "url('/welcome-bg-4.jpg')" }}
     >
       {/* Semi-transparent overlay for better text readability */}
       <div className="absolute inset-0 bg-black/20" />
 
-      <section className="px-4 relative z-10 flex h-full flex-col items-center justify-center text-center">
+      <section className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center">
         <WelcomeImage />
 
-        <p className="text-white text-2xl md:text-3xl md:max-w-[80%] lg:max-w-[40%] pt-1 leading-7 font-medium font-mochibop-demo">{welcomeNote}</p>
+        <p className="font-mochibop-demo pt-1 text-2xl leading-7 font-medium text-white md:max-w-[80%] md:text-3xl lg:max-w-[40%]">
+          {welcomeNote}
+        </p>
 
         {/* Custom styled button matching reference design */}
-        <button
-          onClick={onStartCall}
-          className="mt-6 group relative cursor-pointer"
-        >
+        <button onClick={onStartCall} className="group relative mt-6 cursor-pointer">
           {/* Outer ring/border - light purple */}
-          <div className="absolute inset-0 bg-gradient-to-b from-indigo-200 via-purple-200 to-indigo-300 rounded-full shadow-lg"></div>
+          <div className="absolute inset-0 rounded-full bg-gradient-to-b from-indigo-200 via-purple-200 to-indigo-300 shadow-lg"></div>
 
           {/* Inner button with blue gradient */}
-          <div className="relative m-[6px] px-14 py-3 bg-gradient-to-b from-cyan-400 via-sky-500 to-blue-600 rounded-full shadow-inner transform group-hover:scale-[1.02] group-active:scale-[0.98] transition-transform duration-200">
-            <span className="text-white text-xl tracking-widest drop-shadow-md font-beachday">
+          <div className="relative m-[6px] transform rounded-full bg-gradient-to-b from-cyan-400 via-sky-500 to-blue-600 px-14 py-3 shadow-inner transition-transform duration-200 group-hover:scale-[1.02] group-active:scale-[0.98]">
+            <span className="font-beachday text-xl tracking-widest text-white drop-shadow-md">
               {startButtonText}
             </span>
           </div>
@@ -62,9 +61,9 @@ export const WelcomeView = ({
       </section>
 
       {/* Bottom footer - made friendlier */}
-      <div className="fixed bottom-4 left-0 flex w-full items-center justify-center z-10 px-4">
-        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-full px-5 py-2.5 shadow-lg">
-          <p className="text-slate-600 dark:text-slate-300 text-xs md:text-sm font-medium">
+      <div className="fixed bottom-4 left-0 z-10 flex w-full items-center justify-center px-4">
+        <div className="rounded-full bg-white/80 px-5 py-2.5 shadow-lg backdrop-blur-sm dark:bg-slate-800/80">
+          <p className="text-xs font-medium text-slate-600 md:text-sm dark:text-slate-300">
             ✨ Powered by Veritas Learning Circle • Built for Students like you 💜
           </p>
         </div>

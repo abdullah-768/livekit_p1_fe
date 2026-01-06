@@ -39,13 +39,13 @@ export const ChatEntry = ({
       <header
         className={cn(
           'flex items-center gap-2 text-sm font-medium',
-          messageOrigin === 'local' 
-            ? 'flex-row-reverse text-[oklch(0.55_0.15_280)]' 
+          messageOrigin === 'local'
+            ? 'flex-row-reverse text-[oklch(0.55_0.15_280)]'
             : 'text-left text-[oklch(0.5_0.15_180)]'
         )}
       >
         {name && <strong>{name}</strong>}
-        <span className="font-mono text-xs opacity-0 transition-opacity ease-linear group-hover:opacity-100 text-[oklch(0.5_0.05_280)]">
+        <span className="font-mono text-xs text-[oklch(0.5_0.05_280)] opacity-0 transition-opacity ease-linear group-hover:opacity-100">
           {hasBeenEdited && '✏️ '}
           {time.toLocaleTimeString(locale, { timeStyle: 'short' })}
         </span>
@@ -53,9 +53,9 @@ export const ChatEntry = ({
       <span
         className={cn(
           'max-w-4/5 rounded-2xl px-4 py-2.5 text-[0.95rem] leading-relaxed shadow-sm',
-          messageOrigin === 'local' 
-            ? 'ml-auto bg-gradient-to-br from-[oklch(0.75_0.2_280)] to-[oklch(0.7_0.22_300)] text-white rounded-br-md' 
-            : 'mr-auto bg-gradient-to-br from-[oklch(0.95_0.03_180)] to-[oklch(0.92_0.05_150)] text-[oklch(0.25_0.05_280)] rounded-bl-md border border-[oklch(0.88_0.08_180)]'
+          messageOrigin === 'local'
+            ? 'ml-auto rounded-br-md bg-gradient-to-br from-[oklch(0.75_0.2_280)] to-[oklch(0.7_0.22_300)] text-white'
+            : 'mr-auto rounded-bl-md border border-[oklch(0.88_0.08_180)] bg-gradient-to-br from-[oklch(0.95_0.03_180)] to-[oklch(0.92_0.05_150)] text-[oklch(0.25_0.05_280)]'
         )}
       >
         {message}

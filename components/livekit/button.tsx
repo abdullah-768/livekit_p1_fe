@@ -15,7 +15,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-[oklch(0.92_0.05_280)] text-[oklch(0.3_0.1_280)] hover:bg-[oklch(0.88_0.08_280)] shadow-sm',
+        default:
+          'bg-[oklch(0.92_0.05_280)] text-[oklch(0.3_0.1_280)] hover:bg-[oklch(0.88_0.08_280)] shadow-sm',
         destructive: [
           'bg-gradient-to-r from-[oklch(0.7_0.2_25)] to-[oklch(0.65_0.22_15)] text-white',
           'hover:from-[oklch(0.65_0.22_25)] hover:to-[oklch(0.6_0.24_15)]',

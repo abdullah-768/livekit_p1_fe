@@ -24,14 +24,14 @@
   --border: oklch(0.88 0.08 280);
   --input: oklch(0.95 0.05 280);
   --ring: oklch(0.7 0.2 280);
-  
+
   /* Fun chart colors for kids */
   --chart-1: oklch(0.7 0.25 330);
   --chart-2: oklch(0.75 0.2 180);
   --chart-3: oklch(0.7 0.2 280);
   --chart-4: oklch(0.8 0.2 90);
   --chart-5: oklch(0.75 0.2 30);
-  
+
   /* Kids-friendly UI colors */
   --kids-pink: oklch(0.75 0.2 350);
   --kids-purple: oklch(0.65 0.25 280);
@@ -39,7 +39,7 @@
   --kids-green: oklch(0.75 0.2 150);
   --kids-yellow: oklch(0.9 0.15 90);
   --kids-orange: oklch(0.8 0.18 50);
-  
+
   --sidebar: oklch(0.98 0.02 280);
   --sidebar-foreground: oklch(0.25 0.05 280);
   --sidebar-primary: oklch(0.65 0.25 280);
@@ -146,7 +146,7 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-image: 
+    background-image:
       radial-gradient(ellipse at 20% 20%, oklch(0.9 0.1 280 / 0.3) 0%, transparent 50%),
       radial-gradient(ellipse at 80% 80%, oklch(0.9 0.1 180 / 0.3) 0%, transparent 50%),
       radial-gradient(ellipse at 50% 50%, oklch(0.95 0.05 90 / 0.2) 0%, transparent 70%);
@@ -190,35 +190,37 @@
       background-position: 250% 0;
     }
   }
-  
+
   /* Fun bounce animation for kids */
   @keyframes bounce-soft {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(0);
     }
     50% {
       transform: translateY(-5px);
     }
   }
-  
+
   .animate-bounce-soft {
     animation: bounce-soft 2s ease-in-out infinite;
   }
-  
+
   /* Playful pulse animation */
   @keyframes pulse-glow {
-    0%, 100% {
+    0%,
+    100% {
       box-shadow: 0 0 20px oklch(0.7 0.2 280 / 0.3);
     }
     50% {
       box-shadow: 0 0 30px oklch(0.7 0.2 280 / 0.5);
     }
   }
-  
+
   .animate-pulse-glow {
     animation: pulse-glow 2s ease-in-out infinite;
   }
-  
+
   /* Rainbow gradient for fun elements */
   .bg-rainbow-gradient {
     background: linear-gradient(
@@ -230,15 +232,14 @@
       oklch(0.7 0.2 240) 100%
     );
   }
-  
+
   /* Playful card style */
   .kids-card {
     background: linear-gradient(135deg, oklch(1 0 0) 0%, oklch(0.98 0.02 280) 100%);
     border: 2px solid oklch(0.88 0.08 280);
     border-radius: 1.5rem;
-    box-shadow: 
+    box-shadow:
       0 4px 20px oklch(0.7 0.15 280 / 0.15),
       0 2px 8px oklch(0.5 0.1 280 / 0.1);
   }
 }
-
