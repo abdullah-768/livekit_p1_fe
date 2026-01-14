@@ -1,4 +1,5 @@
 import { Button } from '@/components/livekit/button';
+import { useAuth } from '@/components/app/auth-provider';
 
 function WelcomeImage() {
   return (
@@ -30,6 +31,8 @@ export const WelcomeView = ({
   onStartCall,
   ref,
 }: React.ComponentProps<'div'> & WelcomeViewProps) => {
+  const { logout } = useAuth();
+
   return (
     <div
       ref={ref}
@@ -38,6 +41,14 @@ export const WelcomeView = ({
     >
       {/* Semi-transparent overlay for better text readability */}
       <div className="absolute inset-0 bg-black/20" />
+
+      {/* Logout button in top-right corner */}
+      <button
+        onClick={logout}
+        className="absolute top-4 right-4 z-20 rounded-full bg-white/20 px-4 py-2 text-sm text-white backdrop-blur-sm transition-all hover:bg-white/30"
+      >
+        Logout
+      </button>
 
       <section className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center">
         <WelcomeImage />

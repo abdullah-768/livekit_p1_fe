@@ -10,6 +10,7 @@ import {
 } from '@livekit/components-react';
 import type { AppConfig } from '@/app-config';
 import { ViewController } from '@/components/app/view-controller';
+import { AuthProvider } from '@/components/app/auth-provider';
 import { Toaster } from '@/components/livekit/toaster';
 import { useAgentErrors } from '@/hooks/useAgentErrors';
 import { useDebugMode } from '@/hooks/useDebug';
@@ -41,14 +42,16 @@ export function App({ appConfig }: AppProps) {
   );
 
   return (
-    <SessionProvider session={session}>
-      <AppSetup />
-      <main className="grid h-svh grid-cols-1 place-content-center">
-        <ViewController appConfig={appConfig} />
-      </main>
-      <StartAudio label="Start Audio" />
-      <RoomAudioRenderer />
-      <Toaster />
-    </SessionProvider>
+    <AuthProvider>
+      <SessionProvider session={session}>
+        <AppSetup />
+        <main className="grid h-svh grid-cols-1 place-content-center">
+          <ViewController appConfig={appConfig} />
+        </main>
+        <StartAudio label="Start Audio" />
+        <RoomAudioRenderer />
+        <Toaster />
+      </SessionProvider>
+    </AuthProvider>
   );
 }
