@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
-import { useSessionContext, useSessionMessages } from '@livekit/components-react';
+import { useDataChannel, useSessionContext, useSessionMessages } from '@livekit/components-react';
 import type { AppConfig } from '@/app-config';
 import { ChatTranscript } from '@/components/app/chat-transcript';
 import { PreConnectMessage } from '@/components/app/preconnect-message';
@@ -47,9 +47,9 @@ export function Fade({ top = false, bottom = false, className }: FadeProps) {
   return (
     <div
       className={cn(
-        'from-background pointer-events-none h-4 bg-linear-to-b to-transparent',
-        top && 'bg-linear-to-b',
-        bottom && 'bg-linear-to-t',
+        'from-background/90 pointer-events-none h-4 bg-linear-to-b to-transparent',
+        top && 'bg-linear-to-b from-[oklch(0.98_0.01_280/0.95)]',
+        bottom && 'bg-linear-to-t from-[oklch(0.98_0.01_280/0.95)]',
         className
       )}
     />
@@ -68,6 +68,10 @@ export const SessionView = ({
   const { messages } = useSessionMessages(session);
   const [chatOpen, setChatOpen] = useState(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const [activeImage, setActiveImage] = useState<{
+    url: string;
+    title: string;
+  } | null>(null);
 
   const controls: ControlBarControls = {
     leave: true,
@@ -76,6 +80,18 @@ export const SessionView = ({
     camera: appConfig.supportsVideoInput,
     screenShare: appConfig.supportsVideoInput,
   };
+
+  useDataChannel((message) => {
+    const data = JSON.parse(new TextDecoder().decode(message.payload));
+
+    if (data.type === 'show_image') {
+      setActiveImage({ url: data.url, title: data.title });
+    }
+
+    if (data.type === 'close_image') {
+      setActiveImage(null);
+    }
+  });
 
   useEffect(() => {
     const lastMessage = messages.at(-1);
@@ -87,7 +103,10 @@ export const SessionView = ({
   }, [messages]);
 
   return (
-    <section className="bg-background relative z-10 h-full w-full overflow-hidden" {...props}>
+    <section
+      className="relative z-10 h-full w-full overflow-hidden bg-gradient-to-br from-[oklch(0.98_0.02_280)] via-[oklch(0.97_0.03_200)] to-[oklch(0.98_0.02_150)]"
+      {...props}
+    >
       {/* Chat Transcript */}
       <div
         className={cn(
@@ -100,13 +119,14 @@ export const SessionView = ({
           <ChatTranscript
             hidden={!chatOpen}
             messages={messages}
-            className="mx-auto max-w-2xl space-y-3 transition-opacity duration-300 ease-out"
+            activeImage={activeImage}
+            className="mx-auto max-w-2xl space-y-4 transition-opacity duration-300 ease-out"
           />
         </ScrollArea>
       </div>
 
       {/* Tile Layout */}
-      <TileLayout chatOpen={chatOpen} />
+      <TileLayout chatOpen={chatOpen} activeImage={activeImage} />
 
       {/* Bottom */}
       <MotionBottom
@@ -116,7 +136,7 @@ export const SessionView = ({
         {appConfig.isPreConnectBufferEnabled && (
           <PreConnectMessage messages={messages} className="pb-4" />
         )}
-        <div className="bg-background relative mx-auto max-w-2xl pb-3 md:pb-12">
+        <div className="relative mx-auto max-w-2xl pb-3 md:pb-12">
           <Fade bottom className="absolute inset-x-0 top-0 h-4 -translate-y-full" />
           <AgentControlBar
             controls={controls}
