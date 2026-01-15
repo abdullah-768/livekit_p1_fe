@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { TokenSource } from 'livekit-client';
 import {
   RoomAudioRenderer,
@@ -29,22 +29,49 @@ interface AppProps {
 }
 
 export function App({ appConfig }: AppProps) {
-  const tokenSource = useMemo(() => {
-    return typeof process.env.NEXT_PUBLIC_CONN_DETAILS_ENDPOINT === 'string'
-      ? getSandboxTokenSource(appConfig)
-      : TokenSource.endpoint('/api/connection-details');
-  }, [appConfig]);
+  const [clientName, setClientName] = useState<string | null>(null);
 
-  const session = useSession(
-    tokenSource,
-    appConfig.agentName ? { agentName: appConfig.agentName } : undefined
-  );
+  const tokenSource = useMemo(() => {
+    if (typeof process.env.NEXT_PUBLIC_CONN_DETAILS_ENDPOINT === 'string') {
+      return getSandboxTokenSource(appConfig);
+    }
+
+    // Create a custom token fetcher that includes clientName in the request
+    return TokenSource.custom(async () => {
+      console.log('Fetching connection details with clientName:', clientName);
+
+      const response = await fetch('/api/connection-details', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          room_config: appConfig.agentName ? { agents: [{ agent_name: appConfig.agentName }] } : undefined,
+          clientName: clientName,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to get connection details');
+      }
+
+      const data = await response.json();
+      console.log('Received connection details:', data);
+      return data;
+    });
+  }, [appConfig, clientName]);
+
+  const session = useSession(tokenSource);
 
   return (
     <SessionProvider session={session}>
       <AppSetup />
       <main className="grid h-svh grid-cols-1 place-content-center">
-        <ViewController appConfig={appConfig} />
+        <ViewController
+          appConfig={appConfig}
+          clientName={clientName}
+          onAuthenticated={setClientName}
+        />
       </main>
       <StartAudio label="Start Audio" />
       <RoomAudioRenderer />
