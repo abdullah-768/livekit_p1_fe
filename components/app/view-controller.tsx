@@ -52,6 +52,7 @@ export function ViewController({ appConfig, clientName, onAuthenticated }: ViewC
           {...VIEW_MOTION_PROPS}
           startButtonText={appConfig.startButtonText}
           welcomeNote={appConfig.welcomeNote}
+          clientName={clientName}
           onStartCall={start}
         />
       )}

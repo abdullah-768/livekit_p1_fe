@@ -21,15 +21,18 @@ function WelcomeImage() {
 interface WelcomeViewProps {
   startButtonText: string;
   welcomeNote: string;
+  clientName?: string;
   onStartCall: () => void;
 }
 
 export const WelcomeView = ({
   startButtonText,
   welcomeNote,
+  clientName,
   onStartCall,
   ref,
 }: React.ComponentProps<'div'> & WelcomeViewProps) => {
+  const fullWelcomeNote = clientName ? `Hi ${clientName}! ${welcomeNote}` : welcomeNote;
   return (
     <div
       ref={ref}
@@ -43,7 +46,7 @@ export const WelcomeView = ({
         <WelcomeImage />
 
         <p className="font-mochibop-demo pt-1 text-2xl leading-7 font-medium text-white md:max-w-[80%] md:text-3xl lg:max-w-[40%]">
-          {welcomeNote}
+          {fullWelcomeNote}
         </p>
 
         {/* Custom styled button matching reference design */}
