@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { TokenSource } from 'livekit-client';
 import {
   RoomAudioRenderer,
@@ -11,6 +11,7 @@ import {
 import type { AppConfig } from '@/app-config';
 import { ViewController } from '@/components/app/view-controller';
 import { Toaster } from '@/components/livekit/toaster';
+import { LoginView } from '@/components/app/login-view';
 import { useAgentErrors } from '@/hooks/useAgentErrors';
 import { useDebugMode } from '@/hooks/useDebug';
 import { getSandboxTokenSource } from '@/lib/utils';
@@ -29,6 +30,7 @@ interface AppProps {
 }
 
 export function App({ appConfig }: AppProps) {
+  const [userData, setUserData] = useState<{ name: string; email: string; password: string } | null>(null);
   const tokenSource = useMemo(() => {
     return typeof process.env.NEXT_PUBLIC_CONN_DETAILS_ENDPOINT === 'string'
       ? getSandboxTokenSource(appConfig)
@@ -44,7 +46,11 @@ export function App({ appConfig }: AppProps) {
     <SessionProvider session={session}>
       <AppSetup />
       <main className="grid h-svh grid-cols-1 place-content-center">
-        <ViewController appConfig={appConfig} />
+        {!userData ? (
+          <LoginView onLogin={setUserData} />
+        ) : (
+          <ViewController appConfig={appConfig} userName={userData.name} />
+        )}
       </main>
       <StartAudio label="Start Audio" />
       <RoomAudioRenderer />

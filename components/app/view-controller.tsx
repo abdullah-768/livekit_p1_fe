@@ -29,10 +29,21 @@ const VIEW_MOTION_PROPS = {
 
 interface ViewControllerProps {
   appConfig: AppConfig;
+  userName: string;
 }
 
-export function ViewController({ appConfig }: ViewControllerProps) {
-  const { isConnected, start } = useSessionContext();
+export function ViewController({ appConfig, userName }: ViewControllerProps) {
+  const { isConnected, start, room } = useSessionContext();
+
+  const handleStart = async () => {
+    await start(); // join the room normally
+
+    // Send userName to the agent via data channel after joining
+    if (room?.localParticipant) {
+      const payload = JSON.stringify({ type: 'set_user_name', userName });
+      await room.localParticipant.publishData(new TextEncoder().encode(payload), { reliable: true });
+    }
+  };
 
   return (
     <AnimatePresence mode="wait">
@@ -43,7 +54,7 @@ export function ViewController({ appConfig }: ViewControllerProps) {
           {...VIEW_MOTION_PROPS}
           startButtonText={appConfig.startButtonText}
           welcomeNote={appConfig.welcomeNote}
-          onStartCall={start}
+          onStartCall={handleStart}
         />
       )}
       {/* Session view */}
